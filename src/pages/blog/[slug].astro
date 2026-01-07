@@ -1,0 +1,652 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  const posts = [
+    {
+      slug: "micro-thoughts",
+      title: "Micro Thoughts",
+      date: "October 22, 2023",
+      category: "",
+      image: "/images/blog/micro-thoughts.jpg",
+      content: `
+        <ul class="micro-list">
+          <li>Understand your knowledge gaps and dislikes; collaborate with those possessing complementary strengths.</li>
+          <li>Filter out excessive external input—identify the few priorities that genuinely matter.</li>
+          <li>In early stages, recruit for potential and capability rather than résumé; transition to specialists once foundations solidify.</li>
+          <li>Adopt a multi-year perspective; meaningful accomplishments require sustained effort.</li>
+          <li>Systematically collect quantitative metrics, personal instincts, and feedback to guide product evolution.</li>
+          <li>Confront uncomfortable challenges directly—these areas typically demand your attention most.</li>
+          <li>Frequent mistakes signal adequate ambition; few errors indicate insufficient risk-taking.</li>
+          <li>Customer visits and team travel provide irreplaceable learning opportunities.</li>
+          <li>Maintain kindness while protecting personal limits.</li>
+        </ul>
+      `
+    },
+    {
+      slug: "story-telling",
+      title: "Story Telling",
+      date: "November 15, 2022",
+      category: "",
+      image: "",
+      content: `
+        <p>10 different types of stories to tell as a leader and some tips on how to craft them.</p>
+
+        <p>The importance of crafting narratives for leadership contexts, particularly "broadcast meetings" where leaders communicate organizational vision to new team members, partners, or existing staff.</p>
+
+        <h3>Ten Essential Leadership Stories</h3>
+        <ol>
+          <li>Origin story (founding narrative)</li>
+          <li>Case for change (urgency/vision shift)</li>
+          <li>Future vision narrative</li>
+          <li>Strategic execution plan</li>
+          <li>Values and beliefs framework</li>
+          <li>Customer focus story</li>
+          <li>Customer success case study</li>
+          <li>Competitive differentiation</li>
+          <li>Leadership philosophy</li>
+          <li>Organizational culture/recruitment narrative</li>
+        </ol>
+
+        <h3>Storytelling Guidelines</h3>
+        <p><strong>Recommended practices include:</strong></p>
+        <ul>
+          <li>"Do open with a scene" to capture attention immediately</li>
+          <li>Maintain narrative clarity with distinct beginning, middle, and end</li>
+          <li>Use accessible, conversational language</li>
+          <li>Employ vivid word choices and varied sentence structure</li>
+          <li>Show emotional states through action rather than explicit emotional language</li>
+          <li>Deliver with strategic pauses and committed performance</li>
+        </ul>
+
+        <p><strong>Practices to avoid:</strong></p>
+        <ul>
+          <li>Excessive detail that obscures core messages</li>
+          <li>Formal or thesaurus-heavy vocabulary</li>
+          <li>Clichéd expressions</li>
+          <li>Emotional declarations without supporting action</li>
+          <li>Self-deprecating framing</li>
+        </ul>
+
+        <p>Use contrast, analogies, positive self-presentation, and audience engagement techniques to maximize narrative impact.</p>
+      `
+    },
+    {
+      slug: "convert-luxuries-into-utilities",
+      title: "Convert luxuries into utilities, utilities into luxuries",
+      date: "January 17, 2020",
+      category: "",
+      image: "/images/blog/convert-luxuries.jpg",
+      content: `
+        <p>A framework for thinking about how products and services evolve over time.</p>
+        <p>What starts as a luxury eventually becomes a utility as it becomes more accessible and expected. Conversely, what was once common can become a luxury through scarcity or renewed appreciation.</p>
+      `
+    },
+    {
+      slug: "4-questions-to-become-a-better-leader",
+      title: "4 Questions to become a better leader",
+      date: "June 22, 2019",
+      category: "",
+      image: "/images/blog/4-questions.jpg",
+      content: `
+        <p>Effective leadership development relies on self-inquiry rather than formulaic answers. Drawing on research from Claire Lew at Knowyourteam.com, here are four reflective questions for managers.</p>
+
+        <h3>1. How can I create an environment for people to do their best work?</h3>
+        <p>Leaders should focus on shaping environments rather than manipulating people—controlling communication, decisions, and support gestures within their direct influence.</p>
+
+        <h3>2. How can I create clarity about what needs doing and why?</h3>
+        <p>Managers must communicate vision, mission, and goals beyond their own understanding, connecting work's relevance to individual team members.</p>
+
+        <h3>3. How can I model desired behavior across my team?</h3>
+        <p>Leaders earn trust through personal exemplification—punctuality, honest feedback, and consistency demonstrate authentic commitment.</p>
+
+        <h3>4. How can I see things as they are, not as desired?</h3>
+        <p>Clear perception of current reality prevents leadership surprises.</p>
+
+        <blockquote>
+          <p>"The most effective people are those who can 'hold' their vision while remaining committed to seeing current reality clearly."</p>
+          <cite>— Peter Senge, The Fifth Discipline</cite>
+        </blockquote>
+
+        <p>The key is iterative self-reflection through regular questioning over prescribed management checklists.</p>
+      `
+    },
+    {
+      slug: "how-to-create-a-great-team-culture",
+      title: "How to Create a Great Team Culture",
+      date: "May 19, 2019",
+      category: "Leadership",
+      image: "",
+      content: `
+        <p>The leader's job is to cultivate the type of culture that will lead to success.</p>
+
+        <p>Drawing from Daniel Coyle's <em>The Culture Code</em>, there are three essential elements:</p>
+        <ul>
+          <li><strong>Build safety</strong> — fostering secure environments</li>
+          <li><strong>Share vulnerability</strong> — encouraging risk-taking for cooperation</li>
+          <li><strong>Establish purpose</strong> — aligning around shared goals</li>
+        </ul>
+
+        <h3>See the Role You Play in Team Culture</h3>
+        <p>Leaders establish norms through modeling behavior. One bad apple or toxic employee can bring down the whole team. Leaders must actively cultivate desired culture rather than allowing negative dynamics to develop organically.</p>
+
+        <h3>Creating Connections</h3>
+        <p>Strategies for building cohesion include:</p>
+        <ul>
+          <li>Enforcing collaboration on shared problems</li>
+          <li>Encouraging direct peer feedback</li>
+          <li>Recognizing collaborative achievements</li>
+          <li>Creating trust-building opportunities</li>
+        </ul>
+
+        <h3>Define Your Culture by Knowing Its Value</h3>
+        <p>Leaders should identify <em>why</em> the team exists beyond functional roles, considering advantages of collective work (learning, decision-making quality, resource pooling).</p>
+
+        <h3>How to Create Cultural Touchpoints Around Your Values</h3>
+        <p>Implementation requires daily practices, not mere statements. Examples include code review processes, brown bag sessions, or standardized reporting formats.</p>
+
+        <h3>Team Structure Becomes Team Culture</h3>
+        <p>Culture emerges from everyday actions—communication styles, decision procedures, meeting formats—not symbolic gestures.</p>
+        <p>Practical examples:</p>
+        <ul>
+          <li>Weekly demo meetings showcasing accomplishments</li>
+          <li>Teaching slots during team meetings</li>
+          <li>Celebration rituals (e.g., cupcakes for launches)</li>
+        </ul>
+
+        <h3>Let the Culture Expand from the Top Down</h3>
+        <p>Delegation of culture-building responsibilities to team members creates genuine ownership and inclusivity.</p>
+      `
+    },
+    {
+      slug: "investment-criteria",
+      title: "Investment Criteria",
+      date: "December 7, 2017",
+      category: "Investing",
+      image: "",
+      content: `
+        <p>Keith Rabois's investment framework for evaluating opportunities seeking outsized returns (50-100x).</p>
+
+        <h3>1. What is Anomalous?</h3>
+        <p>Identifies unique aspects distinguishing the opportunity—exceptional management, standout metrics, competitive advantages in distribution or capital access.</p>
+
+        <h3>2. What "Secret" Grounds the Company?</h3>
+        <p>The venture requires a fundamental insight about market inefficiency. Examples:</p>
+        <ul>
+          <li><strong>Netflix:</strong> "Most content will be streamed vs served through cable"</li>
+          <li><strong>Amazon:</strong> Internet enables service-layer taxation of businesses (AWS model)</li>
+        </ul>
+
+        <h3>3. Could This Be Transformational?</h3>
+        <p>Assesses whether the company could become globally significant, requiring imagination about future scale and impact.</p>
+
+        <h3>4. What Accumulating Advantage Exists?</h3>
+        <p>Examines how competitive advantages strengthen over time through network effects (Instagram, Facebook, Twitter), data accumulation (Google), or economies of scale (Amazon, Starbucks).</p>
+
+        <h3>5. Can the Founder Attract Required Talent?</h3>
+        <p>Evaluates leadership's capacity to source and inspire exceptional team members through vision articulation and track record.</p>
+
+        <h3>6. Why Do We Have Comparative Advantage?</h3>
+        <p>Questions why this investor deploys capital more efficiently in this sector than alternatives or competitors.</p>
+
+        <p>Additional insight from Sahil, Sam Altman, and Paul Graham: "compelling founders, mission-driven culture, exceptional products, growing markets, network effects, low marginal costs, rapid scalability."</p>
+      `
+    },
+    {
+      slug: "how-to-interview-a-product-manager",
+      title: "How to interview a product manager",
+      date: "February 9, 2016",
+      category: "Advice, Product Development",
+      image: "",
+      content: `
+        <p>Key considerations for hiring product managers, drawing insights from Jeremy Horn's Product Mentor and First Round Capital's resources.</p>
+
+        <h3>Core Competencies</h3>
+        <p>Universal PM skills across industries:</p>
+        <ul>
+          <li><strong>Organizational abilities</strong> and proven delivery track record</li>
+          <li><strong>Political navigation</strong> across teams and stakeholders</li>
+          <li><strong>Empathy and communication excellence</strong></li>
+          <li>Ability to articulate winning product vision, rally teams, and iterate effectively</li>
+        </ul>
+
+        <h3>Key Hiring Takeaways</h3>
+
+        <p><strong>1. Clarify Your Needs</strong><br>
+        Assess whether you need a PM due to developer overload, competing projects, or increased complexity.</p>
+
+        <p><strong>2. Essential Skills</strong><br>
+        "Gantcharts, Agile, Waterfall .. nonsense and all can be taught." Prioritize empathy and communication over methodological expertise.</p>
+
+        <p><strong>3. Decision-Making Ability</strong><br>
+        PMs should say "no" frequently. Candidates should demonstrate instances of declining feature requests.</p>
+
+        <p><strong>4. Sourcing Channels</strong><br>
+        Recommended platforms: angel.co, LinkedIn, Hired.com, local product meetups</p>
+
+        <p><strong>5. Resume Filters</strong></p>
+        <ul>
+          <li>Product shipped successfully</li>
+          <li>Hard science background (optional plus)</li>
+          <li>Pride in previous work</li>
+          <li>Writing samples, community involvement</li>
+          <li>Avoid: designations, awards laundry lists</li>
+        </ul>
+
+        <p><strong>6. Critical Traits to Evaluate</strong><br>
+        Seek evidence of lie detection, trustworthiness, empathy, leadership, and prudence through detailed storytelling.</p>
+
+        <p><strong>7. Role Clarity</strong><br>
+        PMs should support engineering teams deeply rather than act as relays between groups.</p>
+      `
+    },
+    {
+      slug: "product-management-video",
+      title: "Product Management: Video",
+      date: "December 29, 2015",
+      category: "Product Development",
+      image: "/images/blog/product-management-video.jpg",
+      content: `
+        <p>A quick guide to managing any digital project by Des Traynor, founder of Intercom.</p>
+
+        <h3>Key Takeaways</h3>
+        <ol>
+          <li>Perform regular feature audits using analytics and database data to measure usage</li>
+          <li>Ensure new features pass through a checklist prior to beginning development</li>
+          <li>Imagine supporting a feature for 5 years</li>
+          <li>Assess whether it fits the product vision</li>
+          <li>Say 'No' to features more often to focus on core offerings</li>
+          <li>Evaluate if the feature benefits everyone or key users only</li>
+          <li>Don't measure success via features shipped</li>
+          <li>Don't be afraid of killing features</li>
+          <li>Revisit old assumptions</li>
+        </ol>
+      `
+    },
+    {
+      slug: "if-by-rudyard-kipling",
+      title: "if by Rudyard Kipling",
+      date: "April 25, 2014",
+      category: "Poem",
+      image: "",
+      content: `
+        <blockquote class="poem">
+          <p>If you can keep your head when all about you<br>
+          Are losing theirs and blaming it on you,<br>
+          If you can trust yourself when all men doubt you,<br>
+          But make allowance for their doubting too;<br><br>
+
+          If you can wait and not be tired by waiting,<br>
+          Or being lied about, don't deal in lies,<br>
+          Or being hated, don't give way to hating,<br>
+          And yet don't look too good, nor talk too wise:<br><br>
+
+          If you can dream—and not make dreams your master;<br>
+          If you can think—and not make thoughts your aim;<br>
+          If you can meet with Triumph and Disaster<br>
+          And treat those two impostors just the same;<br><br>
+
+          If you can bear to hear the truth you've spoken<br>
+          Twisted by knaves to make a trap for fools,<br>
+          Or watch the things you gave your life to, broken,<br>
+          And stoop and build 'em up with worn-out tools:<br><br>
+
+          If you can make one heap of all your winnings<br>
+          And risk it on one turn of pitch-and-toss,<br>
+          And lose, and start again at your beginnings<br>
+          And never breathe a word about your loss;<br><br>
+
+          If you can force your heart and nerve and sinew<br>
+          To serve your turn long after they are gone,<br>
+          And so hold on when there is nothing in you<br>
+          Except the Will which says to them: 'Hold on!'<br><br>
+
+          If you can talk with crowds and keep your virtue,<br>
+          Or walk with Kings—nor lose the common touch,<br>
+          If neither foes nor loving friends can hurt you,<br>
+          If all men count with you, but none too much;<br><br>
+
+          If you can fill the unforgiving minute<br>
+          With sixty seconds' worth of distance run,<br>
+          Yours is the Earth and everything that's in it,<br>
+          And—which is more—you'll be a Man, my son!</p>
+          <cite>— Rudyard Kipling</cite>
+        </blockquote>
+      `
+    },
+    {
+      slug: "teddy-roosevelt-on-leadership",
+      title: "Teddy Roosevelt on Leadership",
+      date: "April 3, 2013",
+      category: "Leadership",
+      image: "/images/blog/teddy-roosevelt.jpg",
+      content: `
+        <blockquote>
+          <p>"The best executive is the one who has sense enough to pick good men to do what he wants done, and self-restraint enough to keep from meddling with them while they do it."</p>
+          <cite>— Theodore Roosevelt</cite>
+        </blockquote>
+        <p>Hire well and stay out of the way.</p>
+      `
+    },
+    {
+      slug: "dont-try-this-at-home",
+      title: "Don't try this at home",
+      date: "April 3, 2013",
+      category: "Advice",
+      image: "/images/blog/dont-try-this.jpg",
+      content: `
+        <blockquote>
+          <p>"If you don't got no haters you ain't poppin"</p>
+          <cite>— Rico Richie</cite>
+        </blockquote>
+
+        <p>Last week I was kidnapped as a birthday prank. The incident caused no injuries and involved no weapons. Thanks to friends for organizing the weekend, and apologies to New York City for any confusion caused.</p>
+
+        <p>Managing leaked personal incidents online.</p>
+      `
+    },
+    {
+      slug: "the-nick-app",
+      title: "The Nick App",
+      date: "February 1, 2013",
+      category: "Product Development",
+      image: "/images/blog/nick-app.jpg",
+      content: `
+        <p>Netflix with Slime.</p>
+
+        <p>My team at Viacom launched the Nick app for iPad following two years of research and co-design work with children. The application represented the first TV Everywhere application on iOS for Nickelodeon, offering full episodes alongside short-form video, games, galleries, interactive animations, and personalization features.</p>
+
+        <h3>Key Research Findings</h3>
+        <p>Children prioritize discovery-based entertainment and on-demand access, typically using tablets for brief sessions rather than extended periods.</p>
+
+        <h3>Design Challenges Addressed</h3>
+        <ul>
+          <li>Communicating authentication value to young users</li>
+          <li>Distinguishing between downloadable and HTML5 games</li>
+          <li>Integrating playful elements into video-focused interface</li>
+          <li>Maximizing screen space through gesture-based navigation</li>
+        </ul>
+
+        <p>The application represented a strategic shift away from traditional broadcast models toward multi-platform distribution.</p>
+      `
+    },
+    {
+      slug: "communication-strategies-for-effective-ceos",
+      title: "Communication Strategies for Effective CEOs",
+      date: "January 3, 2019",
+      category: "Leadership",
+      image: "",
+      content: `
+        <div class="summary-box">
+          <h3>Summary</h3>
+          <p>Success is achieved not when the CEO thinks something is important, but when everyone does. This essay covers practical internal communication tactics from leaders at Salesforce, Drift, Front, and PayPal. Key principles: narratives move people more than facts; always explain the "why" before the "what"; alignment requires two-way communication; and repetition is essential—you must repeat messages until you're sick of saying them. Practical frameworks include weekly team updates, V2MOM goal-setting, all-hands meeting notes, and personal newsletters to build organizational alignment at scale.</p>
+        </div>
+
+        <h3>The Fundamental Premise</h3>
+        <p>Most of us are wired to believe that if we say something, those who hear us will just naturally execute it exactly as we had envisioned it in the first place. If only managing people were that easy. In reality, just because you said, doesn't mean it's actually going to happen. Without providing the right direction, determination, and ongoing communication about the context of the work to be done, the chances of actually observing the result you envisioned are very low.</p>
+
+        <p>The fundamental premise is that success is achieved not when the CEO thinks something is important, but when everyone thinks it is.</p>
+
+        <h3>Narratives (not facts) are what move people</h3>
+        <p>Subtract facts from reality, and what's left is storytelling. Great leaders know that while facts help people understand and comprehend reality, it's in narratives that make enthusiasm, excitement and passion "happen". Ultimately, we are the stories that we tell.</p>
+
+        <blockquote>
+          <p>"If you want to build a ship, don't drum up people to collect wood and don't assign them tasks and work, but rather teach them to long for the endless immensity of the sea."</p>
+          <cite>— Antoine de Saint-Exupery</cite>
+        </blockquote>
+
+        <p>When communicating important new messages, rather than presenting new facts try thinking of it as broaching a new narrative. Think of what you're trying to accomplish in a broader and more holistic way, surrounding the facts (the actual company goals and milestones) with a convincing and appealing narrative.</p>
+
+        <h3>The why always before the what</h3>
+        <p>Your best people want to know the why and understand the broader context beyond their individual responsibilities. Just because you said the what, it won't magically make it happen unless you have a very convincing why. To make things happen you need to spend a disproportionate amount of time on the why than the what.</p>
+
+        <p>Your audience is already busy with their own work. In order to get them to take notice, and far more importantly, change behavior, it's essential you provide the context behind your message. The deeper you get into the why the more they will buy into your message.</p>
+
+        <h3>Alignment is not one-way only</h3>
+        <p>No matter how clear and profound your explanations, after explaining the facts and your narrative, it's equally critical that the team feels heard on the subject. People have different perspectives and it's vital that communication goes both ways. People must be able to ask questions and offer critiques and ideas.</p>
+
+        <h3>Repeat, repeat, repeat</h3>
+        <p>David Gergen, former advisor to several US presidents wrote:</p>
+        <blockquote>
+          <p>"History teaches that almost nothing a leader says is heard if spoken only once"</p>
+        </blockquote>
+
+        <p>There's no doubt here: repetition is the mother of all learning. If you want to inculcate in people a specific message or a specific new set of behaviors, you have to repeat things. To make sure your message is really percolating down to every member of the organization, you have to repeat it so often that "you grow sick of hearing yourself say it" as Jeff Weiner from LinkedIn simply put.</p>
+
+        <h3>How to Communicate as a Founder CEO</h3>
+
+        <p><strong>Weekly Team Update:</strong> One of the best communication strategies for entrepreneurs is a weekly update email to employees, advisors, mentors, and investors. The email gives an overview of tactical updates from the previous week and for the week ahead. The basic macro elements: revenues, recruiting, product and customers.</p>
+
+        <p><strong>Metrics Weekly Round-Up:</strong> Peter Thiel, back in his days as Founder/CEO at PayPal, used to run internal weekly and monthly staff meetings to discuss every single metric behind the company's progress. Aggregate the top three most important company-wide metrics in a single digest delivered to everyone.</p>
+
+        <p><strong>Beyond the Obvious Weekly:</strong> As a Founder CEO there are certain things about your company that only you can see. Sharing your thoughts in internal memos is critical to helping the people around you understand the broader context of your vision.</p>
+
+        <p><strong>Personal Weekly Newsletter:</strong> Write a personally curated publication shared weekly with your entire company. This helps share the thoughts that wouldn't normally make it into an all-hands meeting. David Cancel, Drift Founder/CEO, writes a weekly email newsletter every Sunday night—anyone can subscribe whether they work at Drift or not.</p>
+
+        <p><strong>All-Hands Meeting Notes:</strong> This is probably the most important meeting in your entire company. Maximize coverage by sending company-wide minutes after the meeting has ended.</p>
+
+        <h3>Quarterly V2MOM</h3>
+        <p>One of the best examples comes from Marc Benioff at Salesforce. V2MOM stands for: Vision, Values, Methods, Obstacles, and Measures.</p>
+
+        <ul>
+          <li><strong>Vision:</strong> Define what you want the team to do</li>
+          <li><strong>Values:</strong> Establish what is most important about that vision</li>
+          <li><strong>Methods:</strong> Illustrate how you will get the job done</li>
+          <li><strong>Obstacles:</strong> Identify challenges you may have to overcome</li>
+          <li><strong>Measures:</strong> Specify the actual result you aim to achieve</li>
+        </ul>
+
+        <p>The V2MOM is an exercise in awareness, the result of which is total company alignment.</p>
+
+        <h3>What a Founder CEO should expect from their exec team</h3>
+        <p>Your responsibilities include the communication of your entire executive team. Expect your exec teams to distribute context at the edge of the organization.</p>
+
+        <p><strong>Make public meeting notes:</strong> Jack Dorsey famously initiated the meeting-notes policy at Square: "Any meeting of more than two people, someone's required to take notes and send them to an [email] alias."</p>
+
+        <p><strong>Email Transparency:</strong> Stripe was one of the first companies to embrace full email transparency. By convention, every email at Stripe is CC-ed to lists that go to either the entire company or to a particular team.</p>
+
+        <h3>General Principles</h3>
+        <ol>
+          <li><strong>Cut through the clutter:</strong> Pick a medium where people are actually able to focus and read at a slower pace.</li>
+          <li><strong>Pick an internal naming convention:</strong> Create an emotional connection between your messages and your people. Find terminology that resonates and jumps off the page.</li>
+          <li><strong>Be Consistent:</strong> Once the schedule is made, never miss an update. Once the medium is selected, never change it. Once the tone is established, never subvert it.</li>
+          <li><strong>Measure, Measure, Measure:</strong> Just like you measure everything about your product, measure everything about your internal comms.</li>
+        </ol>
+
+        <h3>Conclusions</h3>
+        <p>Good communication compounds over time. But by the same token, the implications of bad communication magnify progressively. If your people aren't informed by you, there's a good chance they'll be misinformed by others.</p>
+
+        <p>Poor information and unaddressed knowledge gaps compound over time and lead to all sorts of inconsistent contexts, and differing contexts are the root cause of conflict and unnecessary disagreements.</p>
+
+        <p>The job of communicating is simply never done. Work hard to make it part of the daily routine of yourself and the leaders and the operators in your company.</p>
+      `
+    }
+  ];
+
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<BaseLayout title={`${post.title} — Cristian Joe`}>
+  <article class="blog-post">
+    <header class="post-header">
+      <p class="post-date">{post.date}</p>
+      <h1 class="post-title">{post.title}</h1>
+      {post.category && <p class="post-category">{post.category}</p>}
+    </header>
+
+    {post.image && (
+      <div class="post-image">
+        <img src={post.image} alt={post.title} />
+      </div>
+    )}
+
+    <div class="post-content" set:html={post.content} />
+
+    <footer class="post-footer">
+      <a href="/" class="back-link">← Back to Blog</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .blog-post {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .post-header {
+    text-align: center;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-header .post-date {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+    margin-bottom: 15px;
+  }
+
+  .post-header .post-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+  }
+
+  .post-header .post-category {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-secondary);
+  }
+
+  .post-image {
+    margin-bottom: 40px;
+  }
+
+  .post-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .post-content {
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(.micro-list) {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .post-content :global(.micro-list li) {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+
+  .post-content :global(.micro-list li:last-child) {
+    border-bottom: none;
+  }
+
+  .post-content :global(blockquote) {
+    margin: 2rem 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--color-border);
+    font-style: italic;
+    color: var(--color-text-secondary);
+  }
+
+  .post-content :global(blockquote.poem) {
+    border-left: none;
+    padding-left: 0;
+    text-align: center;
+    font-style: normal;
+  }
+
+  .post-content :global(blockquote cite) {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-style: normal;
+  }
+
+  .post-content :global(strong) {
+    font-weight: 600;
+  }
+
+  .post-content :global(em) {
+    font-style: italic;
+  }
+
+  .post-content :global(.summary-box) {
+    background-color: #f8f8f6;
+    border-left: 3px solid var(--color-text);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .post-content :global(.summary-box h3) {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .post-content :global(.summary-box p) {
+    margin-bottom: 0;
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+  }
+
+  .post-footer {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .back-link {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+  }
+
+  .back-link:hover {
+    color: var(--color-text);
+  }
+</style>

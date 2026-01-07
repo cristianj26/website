@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = [
+  {
+    date: "Oct 22",
+    title: "Micro Thoughts",
+    category: "",
+    excerpt: "",
+    url: "/blog/micro-thoughts",
+    external: false
+  },
+  {
+    date: "Nov 15",
+    title: "Story Telling",
+    category: "",
+    excerpt: "10 different types of stories to tell as a leader and some tips on how to craft them.",
+    url: "/blog/story-telling",
+    external: false
+  },
+  {
+    date: "Apr 11",
+    title: "Concise Business Writing",
+    category: "",
+    excerpt: "",
+    url: "https://curiousexpeditions.substack.com",
+    external: true
+  },
+  {
+    date: "Jan 17",
+    title: "Convert luxuries into utilities, utilities into luxuries",
+    category: "",
+    excerpt: "",
+    url: "/blog/convert-luxuries-into-utilities",
+    external: false
+  },
+  {
+    date: "Jan 3",
+    title: "Communication strategies for effective CEOs",
+    category: "Leadership",
+    excerpt: "Practical tactics for internal communication from world-class leaders at Salesforce, Drift, Front and PayPal.",
+    url: "/blog/communication-strategies-for-effective-ceos",
+    external: false
+  },
+  {
+    date: "Jun 22",
+    title: "4 Questions to become a better leader",
+    category: "",
+    excerpt: "Questions to ask yourself that reveal what action you need to take, what shift in mindset you need to make.",
+    url: "/blog/4-questions-to-become-a-better-leader",
+    external: false
+  },
+  {
+    date: "May 19",
+    title: "How to Create a Great Team Culture",
+    category: "Leadership",
+    excerpt: "The leader's job is to cultivate the type of culture that will lead to success.",
+    url: "/blog/how-to-create-a-great-team-culture",
+    external: false
+  },
+  {
+    date: "May 13",
+    title: "Tools for finding product/market fit",
+    category: "Product Development",
+    excerpt: "Rahul Vohra of Superhuman explains how to test for product market fit.",
+    url: "https://firstround.com",
+    external: true
+  },
+  {
+    date: "Mar 29",
+    title: "Off sites that work",
+    category: "Leadership",
+    excerpt: "Preparation, agendas, betting on future possibilities and war gaming.",
+    url: "https://hbr.org",
+    external: true
+  },
+  {
+    date: "Feb 1",
+    title: "5 star books of 2018",
+    category: "Books",
+    excerpt: "A reader lives a thousand lives before he dies.",
+    url: "https://ceoplaybook.io",
+    external: true
+  },
+  {
+    date: "Mar 8",
+    title: "109 mental models explained",
+    category: "Advice",
+    excerpt: "Mental models are how we simplify complexity, why we consider some things more relevant than others, and how we reason.",
+    url: "https://fs.blog",
+    external: true
+  },
+  {
+    date: "Dec 7",
+    title: "Investment Criteria",
+    category: "Investing",
+    excerpt: "Keith Rabois investment criteria.",
+    url: "/blog/investment-criteria",
+    external: false
+  },
+  {
+    date: "Feb 9",
+    title: "How to interview a product manager",
+    category: "Advice, Product Development",
+    excerpt: "",
+    url: "/blog/how-to-interview-a-product-manager",
+    external: false
+  },
+  {
+    date: "Jan 19",
+    title: "Get rich (without getting lucky)",
+    category: "Advice",
+    excerpt: "A tweet storm from Naval Ravikant on tactics for creating wealth.",
+    url: "https://twitter.com",
+    external: true
+  },
+  {
+    date: "Dec 29",
+    title: "Product Management: Video",
+    category: "Product Development",
+    excerpt: "A quick guide to managing any web project by Des Traynor founder of Intercom.",
+    url: "/blog/product-management-video",
+    external: false
+  },
+  {
+    date: "Apr 25",
+    title: "if by Rudyard Kipling",
+    category: "Poem",
+    excerpt: "Your's is the earth and everything that is in it.",
+    url: "/blog/if-by-rudyard-kipling",
+    external: false
+  },
+  {
+    date: "Apr 3",
+    title: "Teddy Roosevelt on Leadership",
+    category: "Leadership",
+    excerpt: "Hire well and stay out of the way.",
+    url: "/blog/teddy-roosevelt-on-leadership",
+    external: false
+  },
+  {
+    date: "Apr 3",
+    title: "Don't try this at home",
+    category: "Advice",
+    excerpt: "Managing leaked personal incidents online.",
+    url: "/blog/dont-try-this-at-home",
+    external: false
+  },
+  {
+    date: "Feb 1",
+    title: "The Nick App",
+    category: "Product Development",
+    excerpt: "Netflix with Slime.",
+    url: "/blog/the-nick-app",
+    external: false
+  }
+];
+---
+
+<BaseLayout title="Cristian Joe — Blog">
+  <section class="hero">
+    <div class="content-container">
+      <p class="hero-title">
+        I'm Cristian, a Los Angeles based executive currently leading a distributed team developing products for the insurance sector.
+      </p>
+      <p class="hero-subtitle">
+        Proponent of iterative games, continuous improvement and useful mental models. Product Developer and Team Builder.
+      </p>
+    </div>
+  </section>
+
+  <section class="content-container">
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li class="post-item">
+          <p class="post-date">{post.date}</p>
+          <h2 class="post-title">
+            <a href={post.url} target={post.external ? "_blank" : "_self"} rel={post.external ? "noopener" : ""} class={post.external ? "external-link" : ""}>
+              {post.title}
+            </a>
+          </h2>
+          {post.category && <p class="post-category">{post.category}</p>}
+          {post.excerpt && <p class="post-excerpt">{post.excerpt}</p>}
+        </li>
+      ))}
+    </ul>
+  </section>
+
+</BaseLayout>
