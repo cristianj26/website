@@ -101,9 +101,10 @@ a:hover {
 }
 
 .site-title {
+  font-family: 'Julius Sans One', sans-serif;
   font-size: 1.25rem;
   font-weight: 400;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
