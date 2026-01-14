@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BindHQ | Purpose-Built Software for Specialty Insurance</title>
+
+    <!-- Fonts: Inter + Geist Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Geist Mono', 'monospace'],
+                    },
+                    colors: {
+                        page: '#FAFAFA',
+                        dark: '#111827',
+                        accent: '#3AB1EB',
+                        muted: '#6B7280',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAFAFA;
+            color: #111827;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Corner Bracket Button Styles - Outtake Orange */
+        .btn-bracket {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #3AB1EB;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-bracket:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(58, 177, 235, 0.35);
+            background: #2A9AD4;
+        }
+        .btn-bracket::before,
+        .btn-bracket::after,
+        .btn-bracket .corner-tl,
+        .btn-bracket .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: #3AB1EB;
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket:hover::before,
+        .btn-bracket:hover::after,
+        .btn-bracket:hover .corner-tl,
+        .btn-bracket:hover .corner-br {
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        .btn-bracket-outline {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            color: #111827;
+            border: 1px solid #D1D5DB;
+            cursor: pointer;
+        }
+        .btn-bracket-outline:hover {
+            background: rgba(58, 177, 235, 0.08);
+            border-color: #3AB1EB;
+            color: #3AB1EB;
+        }
+        .btn-bracket-outline::before,
+        .btn-bracket-outline::after,
+        .btn-bracket-outline .corner-tl,
+        .btn-bracket-outline .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: #9CA3AF;
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket-outline:hover::before,
+        .btn-bracket-outline:hover::after,
+        .btn-bracket-outline:hover .corner-tl,
+        .btn-bracket-outline:hover .corner-br {
+            border-color: #3AB1EB;
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket-outline::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket-outline::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket-outline .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket-outline .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        .btn-bracket-white {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #3AB1EB;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-bracket-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(58, 177, 235, 0.4);
+            background: #2A9AD4;
+        }
+        .btn-bracket-white::before,
+        .btn-bracket-white::after,
+        .btn-bracket-white .corner-tl,
+        .btn-bracket-white .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: #3AB1EB;
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket-white:hover::before,
+        .btn-bracket-white:hover::after,
+        .btn-bracket-white:hover .corner-tl,
+        .btn-bracket-white:hover .corner-br {
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket-white::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket-white::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket-white .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket-white .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        .btn-bracket-ghost {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+        .btn-bracket-ghost:hover {
+            background: rgba(58, 177, 235, 0.15);
+            border-color: #3AB1EB;
+            color: #3AB1EB;
+        }
+        .btn-bracket-ghost::before,
+        .btn-bracket-ghost::after,
+        .btn-bracket-ghost .corner-tl,
+        .btn-bracket-ghost .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: rgba(255,255,255,0.5);
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket-ghost:hover::before,
+        .btn-bracket-ghost:hover::after,
+        .btn-bracket-ghost:hover .corner-tl,
+        .btn-bracket-ghost:hover .corner-br {
+            border-color: #3AB1EB;
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket-ghost::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket-ghost::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket-ghost .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket-ghost .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        /* Typewriter Animation - Outtake Orange */
+        .typewriter-word {
+            display: inline-block;
+            color: #3AB1EB;
+            font-weight: 700;
+            border-right: 3px solid #3AB1EB;
+            animation: blink 0.7s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #3AB1EB; }
+        }
+
+        /* Progress Bar - Outtake Orange */
+        .progress-bar-container {
+            width: 100%;
+            max-width: 400px;
+            height: 3px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #3AB1EB, #6BC9F5);
+            border-radius: 2px;
+        }
+
+        /* Counter Animation */
+        .stat-number {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover {
+            border-color: rgba(58, 177, 235, 0.25);
+            box-shadow: 0 12px 40px rgba(58, 177, 235, 0.08);
+        }
+
+        /* Value Card */
+        .value-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+        .value-card:hover {
+            border-color: rgba(58, 177, 235, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(58, 177, 235, 0.08);
+        }
+
+        /* Testimonial Card */
+        .testimonial-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 40px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .testimonial-card:hover {
+            border-color: rgba(58, 177, 235, 0.3);
+            box-shadow: 0 8px 24px rgba(58, 177, 235, 0.06);
+        }
+
+        /* Scroll animations - Enhanced */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered children */
+        .stagger-children > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: translateY(0); }
+        .stagger-children.visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: translateY(0); }
+
+        /* Hero stagger animation */
+        .hero-stagger > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .hero-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+        .hero-stagger > *:nth-child(5) { animation-delay: 0.5s; }
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Nav styles */
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4B5563;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover {
+            color: #3AB1EB;
+            background: rgba(58, 177, 235, 0.08);
+        }
+
+        /* Dropdown styles */
+        .dropdown {
+            position: relative;
+        }
+        .dropdown-trigger {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4B5563;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .dropdown-trigger:hover {
+            color: #111827;
+        }
+        .dropdown-trigger .chevron {
+            transition: transform 0.2s;
+        }
+        .dropdown:hover .chevron {
+            transform: rotate(180deg);
+        }
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 100;
+        }
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .dropdown-content {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border: 1px solid #E5E7EB;
+            overflow: hidden;
+            display: flex;
+        }
+        .dropdown-column {
+            padding: 24px;
+            min-width: 280px;
+        }
+        .dropdown-column:first-child {
+            background: #F9FAFB;
+        }
+        .dropdown-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #9CA3AF;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .dropdown-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 12px;
+            transition: background 0.2s;
+            margin-bottom: 4px;
+        }
+        .dropdown-item:hover {
+            background: rgba(0,0,0,0.03);
+        }
+        .dropdown-item:last-child {
+            margin-bottom: 0;
+        }
+        .dropdown-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .dropdown-icon svg {
+            width: 20px;
+            height: 20px;
+            color: #6B7280;
+        }
+        .dropdown-item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 2px;
+        }
+        .dropdown-item-desc {
+            font-size: 13px;
+            color: #6B7280;
+            line-height: 1.4;
+        }
+
+        /* Floating modules animation */
+        .floating-module {
+            animation: float 6s ease-in-out infinite;
+            transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+        }
+        .floating-module:hover {
+            box-shadow: 0 8px 24px rgba(58, 177, 235, 0.15);
+            border-color: rgba(58, 177, 235, 0.3);
+        }
+        .floating-module:nth-child(2) { animation-delay: 0.5s; }
+        .floating-module:nth-child(3) { animation-delay: 1s; }
+        .floating-module:nth-child(4) { animation-delay: 1.5s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Learn more link - Outtake style */
+        .learn-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'Geist Mono', monospace;
+            color: #111827;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .learn-more:hover {
+            gap: 12px;
+            color: #3AB1EB;
+        }
+
+        /* Section label - Geist Mono */
+        .section-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #3AB1EB;
+        }
+
+        /* Stat card in testimonial */
+        .stat-box {
+            background: #F9FAFB;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 16px 24px;
+            text-align: center;
+        }
+
+        /* Glow border on hover - Orange */
+        .glow-border {
+            position: relative;
+        }
+        .glow-border::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(58, 177, 235, 0.08), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .glow-border:hover::after {
+            opacity: 1;
+        }
+
+        /* Feature number badge */
+        .feature-number {
+            font-family: 'Geist Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: #3AB1EB;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="w-full flex justify-center py-3 bg-page border-b border-gray-100">
+        <a href="#" class="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wide hover:text-gray-900 transition">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> We are hiring
+            <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <a href="/" class="flex items-center">
+                <img src="assets/logo.svg" alt="BindHQ" class="h-6">
+            </a>
+
+            <div class="hidden md:flex items-center gap-1">
+                <a href="product.html" class="nav-link">Product</a>
+
+                <!-- Who We Serve Dropdown -->
+                <div class="dropdown">
+                    <div class="dropdown-trigger">
+                        Who We Serve
+                        <svg class="chevron w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content">
+                            <!-- By Business Type -->
+                            <div class="dropdown-column">
+                                <div class="dropdown-label">By Business Type</div>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">For MGAs</div>
+                                        <div class="dropdown-item-desc">Underwrite risks and manage delegated authority</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">For Program Administrators</div>
+                                        <div class="dropdown-item-desc">Run custom programs with flexible rating and automated carrier reporting</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">For Wholesalers</div>
+                                        <div class="dropdown-item-desc">Distribute specialty products to brokers</div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- By Use Case -->
+                            <div class="dropdown-column">
+                                <div class="dropdown-label">By Use Case</div>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">Headless AMS / PAS</div>
+                                        <div class="dropdown-item-desc">Power your entire operation with a system built for integration and scale</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">Digital Distribution</div>
+                                        <div class="dropdown-item-desc">Launch agent portals, automate submissions, and grow premium without adding overhead</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">Embedded Insurance</div>
+                                        <div class="dropdown-item-desc">Power embedded offerings with rating and APIs out of the box</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="nav-link">Pricing</a>
+                <a href="#" class="nav-link">Case studies</a>
+
+                <!-- Company Dropdown -->
+                <div class="dropdown">
+                    <div class="dropdown-trigger">
+                        Company
+                        <svg class="chevron w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </div>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-content" style="min-width: 240px;">
+                            <div class="dropdown-column" style="min-width: 240px;">
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">About Us</div>
+                                        <div class="dropdown-item-desc">Company & Culture</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">Blog</div>
+                                        <div class="dropdown-item-desc">Insights and updates</div>
+                                    </div>
+                                </a>
+                                <a href="#" class="dropdown-item">
+                                    <div class="dropdown-icon">
+                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <div class="dropdown-item-title">Careers</div>
+                                        <div class="dropdown-item-desc">Join our team</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="dashboard.html" class="nav-link hidden sm:block">Log in</a>
+                <button class="btn-bracket">
+                    Request Demo
+                    <span class="corner-tl"></span>
+                    <span class="corner-br"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-24 pb-20 px-6">
+        <div class="max-w-5xl mx-auto text-center hero-stagger">
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-[-0.02em] text-gray-900 leading-[1.05] mb-8">
+                Purpose-Built Software for Specialty Insurance
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-8">
+                An integrated system for submissions, underwriting, billing, and rating—built for
+                <span class="typewriter-word" id="typewriter">MGAs</span>
+                to scale faster.
+            </p>
+
+            <!-- Progress bar synced with typewriter -->
+            <div class="progress-bar-container mb-10">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="btn-bracket">
+                    Request a Demo
+                    <span class="corner-tl"></span>
+                    <span class="corner-br"></span>
+                </button>
+                <button class="btn-bracket-outline">
+                    Explore Platform
+                    <span class="corner-tl"></span>
+                    <span class="corner-br"></span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Floating Metric Modules -->
+        <div class="max-w-6xl mx-auto px-6 mt-20">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="floating-module bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                    <div class="text-xs text-gray-500 mb-1 uppercase tracking-wide">Policies Issued</div>
+                    <div class="text-2xl font-bold text-gray-900">7,862</div>
+                    <div class="text-xs text-green-600 font-medium mt-1">+23.6% YoY</div>
+                </div>
+                <div class="floating-module bg-gray-900 text-white p-5 rounded-2xl shadow-sm">
+                    <div class="text-xs text-gray-400 mb-1 uppercase tracking-wide">Net Revenue</div>
+                    <div class="text-2xl font-bold">$34.3M</div>
+                    <div class="text-xs text-green-400 font-medium mt-1">+58% YoY</div>
+                </div>
+                <div class="floating-module bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                    <div class="text-xs text-gray-500 mb-1 uppercase tracking-wide">New Quotes</div>
+                    <div class="text-2xl font-bold text-gray-900">9,768</div>
+                    <div class="text-xs text-green-600 font-medium mt-1">+19% YoY</div>
+                </div>
+                <div class="floating-module bg-white p-5 rounded-2xl border border-gray-200 shadow-sm">
+                    <div class="text-xs text-gray-500 mb-1 uppercase tracking-wide">Quote-to-Bind</div>
+                    <div class="text-2xl font-bold text-gray-900">68.6%</div>
+                    <div class="text-xs text-green-600 font-medium mt-1">+27% ratio</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logo Strip -->
+        <div class="mt-16 pt-8 border-t border-gray-100">
+            <p class="text-xs text-center text-gray-400 uppercase tracking-widest mb-8">Trusted by leading specialty insurers</p>
+            <div class="flex items-center justify-center gap-12 md:gap-16 opacity-60 grayscale hover:grayscale-0 hover:opacity-80 transition-all duration-500">
+                <img src="assets/customer-wc-specialty.png" alt="W+C Specialty" class="h-8 md:h-10 w-auto object-contain">
+                <img src="assets/customer-greenshield.png" alt="Green Shield Risk Solutions" class="h-8 md:h-10 w-auto object-contain">
+                <img src="assets/customer-quotewell.png" alt="QuoteWell" class="h-8 md:h-10 w-auto object-contain">
+            </div>
+        </div>
+    </header>
+
+    <!-- Problem/Stats Section -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-label mb-4">
+                    Built to Fix the Problems MGAs Deal With Every Day
+                </h2>
+                <p class="text-xl text-gray-500 max-w-2xl mx-auto">
+                    Insurance operations work better when everything works together.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in-up">
+                <!-- Stat Card 1 -->
+                <div class="relative bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 group">
+                    <div class="absolute top-6 right-6 w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-keyboard text-red-400 text-lg"></i>
+                    </div>
+                    <div class="flex items-baseline gap-1">
+                        <div class="text-6xl font-bold text-gray-900" data-target="40">0</div>
+                        <div class="text-3xl font-bold text-red-500">%</div>
+                    </div>
+                    <div class="text-base font-semibold text-gray-900 mt-3 mb-2">Time Wasted Re-keying</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Underwriters waste over 40% of their day re-keying data across disconnected systems.</p>
+                    <div class="mt-4 w-full bg-gray-100 rounded-full h-2">
+                        <div class="bg-gradient-to-r from-red-400 to-red-500 h-2 rounded-full transition-all duration-1000" style="width: 40%"></div>
+                    </div>
+                </div>
+
+                <!-- Stat Card 2 -->
+                <div class="relative bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 group">
+                    <div class="absolute top-6 right-6 w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-rocket text-blue-500 text-lg"></i>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl font-medium text-gray-300 line-through decoration-2">Months</span>
+                        <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                        <span class="text-5xl font-bold text-blue-600">Days</span>
+                    </div>
+                    <div class="text-base font-semibold text-gray-900 mt-3 mb-2">Speed-to-Market</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Slow system setup delays speed-to-market and revenue opportunities. Launch in days, not months.</p>
+                    <div class="mt-4 flex gap-1">
+                        <div class="flex-1 h-2 bg-gray-200 rounded-full"></div>
+                        <div class="flex-1 h-2 bg-gray-200 rounded-full"></div>
+                        <div class="flex-1 h-2 bg-blue-500 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Stat Card 3 -->
+                <div class="relative bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 group">
+                    <div class="absolute top-6 right-6 w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <i class="fas fa-bolt text-green-500 text-lg"></i>
+                    </div>
+                    <div class="flex items-baseline gap-1">
+                        <div class="text-6xl font-bold text-gray-900" data-target="3">0</div>
+                        <div class="text-3xl font-bold text-green-500">x</div>
+                    </div>
+                    <div class="text-base font-semibold text-gray-900 mt-3 mb-2">Faster Team Velocity</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Eliminate manual steps that slow response times and weaken your competitive edge.</p>
+                    <div class="mt-4 flex items-center gap-2">
+                        <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 text-xs"></i>
+                        </div>
+                        <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 text-xs"></i>
+                        </div>
+                        <div class="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-green-500 text-xs"></i>
+                        </div>
+                        <span class="text-xs text-gray-400 ml-1">3x productivity gains</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="platform" class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-20 fade-in-up">
+                <h2 class="section-label mb-4">
+                    Everything Your Insurance Organization Needs
+                </h2>
+                <p class="text-3xl md:text-4xl font-bold text-gray-900 max-w-3xl mx-auto">
+                    One intuitive platform where underwriting, policy admin, documents, accounting, and reporting all work together.
+                </p>
+            </div>
+
+            <!-- Feature 1: Dashboard -->
+            <div class="feature-card glow-border mb-8 fade-in-up">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden">
+                        <div class="p-4 text-xs">
+                            <div class="grid grid-cols-4 gap-2 mb-3">
+                                <div class="bg-white rounded-lg p-3 border border-gray-100">
+                                    <div class="text-gray-400 text-[10px] uppercase">Submissions</div>
+                                    <div class="text-lg font-bold text-gray-900">1,247</div>
+                                    <div class="text-green-500 text-[10px]">+12.5%</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 border border-gray-100">
+                                    <div class="text-gray-400 text-[10px] uppercase">Bound</div>
+                                    <div class="text-lg font-bold text-gray-900">847</div>
+                                    <div class="text-green-500 text-[10px]">+8.2%</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 border border-gray-100">
+                                    <div class="text-gray-400 text-[10px] uppercase">Premium</div>
+                                    <div class="text-lg font-bold text-gray-900">$4.2M</div>
+                                    <div class="text-green-500 text-[10px]">+23.1%</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 border border-gray-100">
+                                    <div class="text-gray-400 text-[10px] uppercase">Ratio</div>
+                                    <div class="text-lg font-bold text-gray-900">67.9%</div>
+                                    <div class="text-green-500 text-[10px]">+4.3%</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 border border-gray-100 mb-3">
+                                <div class="flex justify-between items-center mb-3">
+                                    <span class="font-semibold text-gray-700">Premium by Month</span>
+                                    <div class="flex gap-1">
+                                        <span class="px-2 py-0.5 bg-gray-100 rounded text-[10px]">6M</span>
+                                        <span class="px-2 py-0.5 bg-gray-900 text-white rounded text-[10px]">1Y</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-end gap-1 h-20">
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 45%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 52%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 48%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 65%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 58%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 72%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 68%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 85%"></div>
+                                    <div class="flex-1 bg-blue-100 rounded-t" style="height: 78%"></div>
+                                    <div class="flex-1 bg-blue-200 rounded-t" style="height: 92%"></div>
+                                    <div class="flex-1 bg-blue-300 rounded-t" style="height: 88%"></div>
+                                    <div class="flex-1 bg-blue-500 rounded-t" style="height: 100%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 border border-gray-100">
+                                <div class="font-semibold text-gray-700 mb-2">Recent Activity</div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                                        <span class="text-gray-600 flex-1">Policy #BHQ-2847 bound</span>
+                                        <span class="text-gray-400">2m ago</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                                        <span class="text-gray-600 flex-1">New submission received</span>
+                                        <span class="text-gray-400">5m ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="feature-number mb-3">01</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Simple, Modern User Experience</h3>
+                        <p class="text-gray-500 mb-6 leading-relaxed">
+                            Get a real-time view of every transaction across teams. Organize your submissions and add automations across brokerage, quoting, and binding authority workflows.
+                        </p>
+                        <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right text-sm"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Underwriting -->
+            <div class="feature-card glow-border mb-8 fade-in-up">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <div class="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                        <div class="feature-number mb-3">02</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Underwriting Tools Built In</h3>
+                        <p class="text-gray-500 mb-6 leading-relaxed">
+                            Define underwriting rules by product, rating calculations, roles and rights. Receive warnings, tasks, or auto-decline based on your guidelines.
+                        </p>
+                        <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right text-sm"></i></a>
+                    </div>
+                    <div class="m-6 md:m-8 order-1 md:order-2 rounded-xl bg-gray-900 border border-gray-700 overflow-hidden">
+                        <div class="p-4 text-xs">
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-purple-500"></div>
+                                    <span class="text-white font-semibold">Submission #SUB-4829</span>
+                                </div>
+                                <span class="px-2 py-0.5 bg-yellow-500/20 text-yellow-400 rounded text-[10px]">In Review</span>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-3 mb-3">
+                                <div class="text-gray-400 text-[10px] uppercase mb-2">Risk Details</div>
+                                <div class="grid grid-cols-2 gap-2 text-gray-300">
+                                    <div><span class="text-gray-500">Insured:</span> Acme Corp</div>
+                                    <div><span class="text-gray-500">Class:</span> Manufacturing</div>
+                                    <div><span class="text-gray-500">State:</span> California</div>
+                                    <div><span class="text-gray-500">TIV:</span> $2,450,000</div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-3 mb-3">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-400 text-[10px] uppercase">Risk Score</span>
+                                    <span class="text-green-400 font-bold">72/100</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-500 to-green-400 h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-3">
+                                <div class="text-gray-400 text-[10px] uppercase mb-2">Rules Check</div>
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-check-circle text-green-500 text-[10px]"></i>
+                                        <span class="text-gray-300">TIV within guidelines</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-check-circle text-green-500 text-[10px]"></i>
+                                        <span class="text-gray-300">Class code approved</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <i class="fas fa-exclamation-circle text-yellow-500 text-[10px]"></i>
+                                        <span class="text-gray-300">Prior losses - review</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <button class="flex-1 bg-green-600 text-white py-2 rounded text-[10px] font-semibold">Approve</button>
+                                <button class="flex-1 bg-gray-700 text-gray-300 py-2 rounded text-[10px] font-semibold">Refer</button>
+                                <button class="flex-1 bg-gray-700 text-gray-300 py-2 rounded text-[10px] font-semibold">Decline</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Accounting -->
+            <div class="feature-card glow-border mb-8 fade-in-up">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden">
+                        <div class="p-4 text-xs">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="font-semibold text-gray-700">Accounting Overview</span>
+                                <span class="text-gray-400 text-[10px]">Q4 2024</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div class="bg-white rounded-lg p-3 border border-gray-100">
+                                    <div class="text-gray-400 text-[10px] uppercase">Gross Premium</div>
+                                    <div class="text-lg font-bold text-gray-900">$8.4M</div>
+                                    <div class="text-green-500 text-[10px]">+18.2% YoY</div>
+                                </div>
+                                <div class="bg-white rounded-lg p-3 border border-gray-100">
+                                    <div class="text-gray-400 text-[10px] uppercase">Commission</div>
+                                    <div class="text-lg font-bold text-gray-900">$1.26M</div>
+                                    <div class="text-gray-400 text-[10px]">15% avg rate</div>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg border border-gray-100 overflow-hidden mb-3">
+                                <div class="px-3 py-2 bg-gray-50 border-b border-gray-100 font-semibold text-gray-700">Recent Transactions</div>
+                                <div class="divide-y divide-gray-50">
+                                    <div class="px-3 py-2 flex items-center justify-between">
+                                        <div>
+                                            <div class="text-gray-700">Premium Receipt</div>
+                                            <div class="text-gray-400 text-[10px]">Policy #BHQ-2841</div>
+                                        </div>
+                                        <span class="text-green-600 font-semibold">+$24,500</span>
+                                    </div>
+                                    <div class="px-3 py-2 flex items-center justify-between">
+                                        <div>
+                                            <div class="text-gray-700">Commission Payout</div>
+                                            <div class="text-gray-400 text-[10px]">Broker: ABC Insurance</div>
+                                        </div>
+                                        <span class="text-red-500 font-semibold">-$3,675</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-emerald-50 rounded-lg p-3 border border-emerald-100">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <div class="text-emerald-600 text-[10px] uppercase font-semibold">Trust Balance</div>
+                                        <div class="text-emerald-700 font-bold">$2,847,392</div>
+                                    </div>
+                                    <i class="fas fa-shield-alt text-emerald-400 text-xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="feature-number mb-3">03</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Integrated Insurance Accounting</h3>
+                        <p class="text-gray-500 mb-6 leading-relaxed">
+                            Premium accounting, commissions, trust accounting, and bordereau reporting come built into your operational workflow.
+                        </p>
+                        <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right text-sm"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4: Reports -->
+            <div class="feature-card glow-border fade-in-up">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <div class="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                        <div class="feature-number mb-3">04</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Instant, Export-Ready Reports</h3>
+                        <p class="text-gray-500 mb-6 leading-relaxed">
+                            Generate underwriting, policy, and accounting reports in seconds—from premium breakdowns to bordereaux and E&S tax summaries.
+                        </p>
+                        <a href="#" class="learn-more">Learn More <i class="fas fa-arrow-right text-sm"></i></a>
+                    </div>
+                    <div class="m-6 md:m-8 order-1 md:order-2 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden">
+                        <div class="p-4 text-xs">
+                            <div class="flex items-center gap-2 mb-3">
+                                <div class="flex-1 bg-white rounded-lg border border-gray-200 px-3 py-2 flex items-center gap-2">
+                                    <i class="fas fa-search text-gray-400 text-[10px]"></i>
+                                    <span class="text-gray-400">Search reports...</span>
+                                </div>
+                                <button class="bg-gray-900 text-white px-3 py-2 rounded-lg text-[10px] font-semibold">
+                                    <i class="fas fa-plus mr-1"></i> New
+                                </button>
+                            </div>
+                            <div class="bg-white rounded-lg border border-gray-100 overflow-hidden">
+                                <div class="divide-y divide-gray-50">
+                                    <div class="px-3 py-3 flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-orange-100 rounded flex items-center justify-center">
+                                            <i class="fas fa-file-alt text-orange-500 text-[10px]"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="text-gray-700 font-medium">Monthly Bordereaux</div>
+                                            <div class="text-gray-400 text-[10px]">Dec 2024 • Lloyd's</div>
+                                        </div>
+                                        <span class="px-2 py-0.5 bg-green-100 text-green-600 rounded text-[10px]">Ready</span>
+                                    </div>
+                                    <div class="px-3 py-3 flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
+                                            <i class="fas fa-chart-bar text-blue-500 text-[10px]"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="text-gray-700 font-medium">Premium by State</div>
+                                            <div class="text-gray-400 text-[10px]">Q4 2024 • Summary</div>
+                                        </div>
+                                        <span class="px-2 py-0.5 bg-green-100 text-green-600 rounded text-[10px]">Ready</span>
+                                    </div>
+                                    <div class="px-3 py-3 flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-purple-100 rounded flex items-center justify-center">
+                                            <i class="fas fa-calculator text-purple-500 text-[10px]"></i>
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="text-gray-700 font-medium">E&S Tax Summary</div>
+                                            <div class="text-gray-400 text-[10px]">2024 Annual</div>
+                                        </div>
+                                        <span class="px-2 py-0.5 bg-yellow-100 text-yellow-600 rounded text-[10px]">Processing</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between">
+                                <span class="text-gray-400">3 reports</span>
+                                <div class="flex gap-1">
+                                    <span class="px-2 py-1 bg-white border border-gray-200 rounded text-[10px]">CSV</span>
+                                    <span class="px-2 py-1 bg-white border border-gray-200 rounded text-[10px]">PDF</span>
+                                    <span class="px-2 py-1 bg-white border border-gray-200 rounded text-[10px]">Excel</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Props Section -->
+    <section id="solutions" class="py-24 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Launch Faster. Operate for Less.</h2>
+                <p class="text-xl text-gray-500 max-w-2xl mx-auto">
+                    Launch a world-class MGA or wholesaler in a fraction of the time—at a lower TCO.
+                </p>
+                <div class="mt-8">
+                    <button class="btn-bracket">
+                        Get in Touch
+                        <span class="corner-tl"></span>
+                        <span class="corner-br"></span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 fade-in-up">
+                <div class="value-card">
+                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-rocket text-gray-700 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Simple Onboarding Process</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        A proven onboarding playbook for MGAs and wholesalers: configuration, data migration, training, and go-live support.
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-coins text-gray-700 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Lower Total Cost of Ownership</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Eliminate multiple vendors, custom integrations, legacy servers, and upgrade projects. One cloud platform.
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-bullseye text-gray-700 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Purpose-Built for MGAs</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Built from day one for delegated authority workflows, underwriting teams, and program business.
+                    </p>
+                </div>
+                <div class="value-card">
+                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fas fa-layer-group text-gray-700 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-3">Future-Ready Infrastructure</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Scale programs, launch new lines, and onboard teams without re-platforming.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-label mb-4">
+                    Why Leading MGAs Choose BindHQ
+                </h2>
+                <p class="text-xl text-gray-500">
+                    Hear how MGAs and wholesalers run faster, cleaner, and more profitably.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 fade-in-up">
+                <div class="testimonial-card">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        "Using BindHQ, we launched a habitational program in four months, cutting turnaround times from days to hours."
+                    </p>
+                    <div class="flex gap-4 mb-8">
+                        <div class="stat-box flex-1">
+                            <div class="text-2xl font-bold text-gray-900">4</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Months to Launch</div>
+                        </div>
+                        <div class="stat-box flex-1">
+                            <div class="text-2xl font-bold text-gray-900">50%</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Cost Savings</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Lindsey Holder</div>
+                            <div class="text-sm text-gray-500">COO</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                        "From migrating off Applied Epic to building on BindHQ APIs, we launched a fully modern wholesale brokerage in weeks."
+                    </p>
+                    <div class="flex gap-4 mb-8">
+                        <div class="stat-box flex-1">
+                            <div class="text-2xl font-bold text-gray-900">3.4h</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Saved Weekly</div>
+                        </div>
+                        <div class="stat-box flex-1">
+                            <div class="text-2xl font-bold text-gray-900">+100%</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wide">Growth YoY</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full"></div>
+                        <div>
+                            <div class="font-semibold text-gray-900">Timur A.</div>
+                            <div class="text-sm text-gray-500">Product Manager</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="bg-gray-900 rounded-3xl p-12 md:p-20 text-center relative overflow-hidden">
+                <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\'%3E%3Cg fill=\'%23ffffff\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                        One purpose-built platform for MGAs, MGUs, and Wholesalers—designed to reduce costs and accelerate launch timelines.
+                    </h2>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 mt-10">
+                        <button class="btn-bracket-white">
+                            Request Demo
+                            <span class="corner-tl"></span>
+                            <span class="corner-br"></span>
+                        </button>
+                        <button class="btn-bracket-ghost">
+                            <i class="far fa-comments mr-2"></i> Talk to Sales
+                            <span class="corner-tl"></span>
+                            <span class="corner-br"></span>
+                        </button>
+                    </div>
+                    <div class="mt-10 text-gray-400 text-sm">
+                        <span class="mr-6">844-424-6347</span>
+                        <span>sales@bindhq.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="flex items-center mb-4">
+                        <img src="assets/logo.svg" alt="BindHQ" class="h-6 brightness-0 invert">
+                    </div>
+                    <p class="text-gray-400 text-sm">The Operating System for Specialty Insurance.</p>
+                </div>
+                <div>
+                    <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Product</h5>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Platform</a></li>
+                        <li><a href="#" class="hover:text-white transition">Underwriting</a></li>
+                        <li><a href="#" class="hover:text-white transition">Accounting</a></li>
+                        <li><a href="#" class="hover:text-white transition">API</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Resources</h5>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="hover:text-white transition">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Company</h5>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">About</a></li>
+                        <li><a href="#" class="hover:text-white transition">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between text-xs text-gray-500">
+                <div>© 2025 BindHQ. All rights reserved.</div>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Typewriter Effect with synced progress bar
+        const words = ['MGAs', 'Wholesalers', 'Program Administrators'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typewriterEl = document.getElementById('typewriter');
+        const progressBar = document.getElementById('progressBar');
+
+        function updateProgressBar() {
+            const progress = ((wordIndex % words.length) / words.length) * 100 +
+                           (1 / words.length) * 100 * (charIndex / words[wordIndex].length);
+            progressBar.style.width = `${Math.min(progress, 100)}%`;
+            progressBar.style.transition = 'width 0.1s linear';
+        }
+
+        function typeWriter() {
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                typewriterEl.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typewriterEl.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            updateProgressBar();
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                if (wordIndex === 0) {
+                    progressBar.style.transition = 'none';
+                    progressBar.style.width = '0%';
+                }
+                typeSpeed = 500;
+            }
+            setTimeout(typeWriter, typeSpeed);
+        }
+        typeWriter();
+
+        // Counter Animation
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-target]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+                const updateCounter = () => {
+                    current += increment;
+                    if (current < target) {
+                        counter.textContent = Math.ceil(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+                updateCounter();
+            });
+        }
+
+        // Scroll Animation
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.querySelector('[data-target]')) {
+                        animateCounters();
+                    }
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

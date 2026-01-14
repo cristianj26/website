@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BindHQ | Dashboard</title>
+
+    <!-- Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        page: '#F8F9FA',
+                        dark: '#1a202c',
+                        accent: '#2563eb',
+                        muted: '#64748b',
+                        'nav-bg': '#111827',
+                        'nav-text': '#9CA3AF',
+                        'nav-hover': '#374151',
+                        'nav-active': '#4F46E5',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: tailwind.config.theme.extend.colors.page;
+            color: tailwind.config.theme.extend.colors.dark;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .sidebar-icon {
+            transition: all 0.2s ease;
+        }
+        .sidebar-icon:hover {
+            color: white;
+        }
+        .metric-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 0.75rem;
+            background: white;
+            transition: all 0.2s ease;
+        }
+        .metric-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body class="flex h-screen">
+
+    <!-- Left Navigation Sidebar -->
+    <aside class="w-20 bg-nav-bg flex flex-col items-center py-6">
+        <a href="/">
+            <img src="assets/logo.svg" alt="BindHQ" class="h-8 w-8 brightness-0 invert opacity-90">
+        </a>
+        <nav class="flex flex-col items-center space-y-8 mt-12">
+            <a href="#" class="text-nav-text sidebar-icon" title="Dashboard">
+                <i class="fas fa-tachometer-alt fa-lg"></i>
+            </a>
+            <a href="home-muted.html" class="text-nav-text sidebar-icon" title="Submissions">
+                <i class="fas fa-inbox fa-lg"></i>
+            </a>
+            <a href="#" class="text-nav-text sidebar-icon" title="Policies">
+                <i class="fas fa-file-contract fa-lg"></i>
+            </a>
+            <a href="#" class="text-nav-text sidebar-icon" title="Accounting">
+                <i class="fas fa-calculator fa-lg"></i>
+            </a>
+            <a href="#" class="text-nav-text sidebar-icon" title="Reports">
+                <i class="fas fa-chart-pie fa-lg"></i>
+            </a>
+            <a href="#" class="text-nav-text sidebar-icon" title="Settings">
+                <i class="fas fa-cog fa-lg"></i>
+            </a>
+        </nav>
+        <div class="mt-auto flex flex-col items-center space-y-6">
+            <a href="#" class="text-nav-text sidebar-icon" title="Help">
+                <i class="fas fa-question-circle fa-lg"></i>
+            </a>
+            <img src="https://i.pravatar.cc/40?u=admin" alt="User Avatar" class="w-10 h-10 rounded-full">
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 overflow-y-auto">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-800">Dashboard</h1>
+                <p class="text-muted">Welcome back, here's a summary of your account.</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <button class="px-3 py-1 text-sm font-semibold bg-white border border-gray-300 rounded-md hover:bg-gray-50">Month</button>
+                    <button class="px-3 py-1 text-sm font-semibold bg-white border border-gray-300 rounded-md hover:bg-gray-50">Quarter</button>
+                    <button class="px-3 py-1 text-sm font-semibold text-white bg-accent border border-accent rounded-md">Year</button>
+                </div>
+                <div class="relative">
+                    <select class="pl-4 pr-10 py-1.5 text-sm font-medium bg-white border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-2 focus:ring-accent">
+                        <option>Filter by producer</option>
+                        <option>Marsh</option>
+                        <option>Aon</option>
+                        <option>Willis</option>
+                    </select>
+                    <i class="fas fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                </div>
+                <div class="text-sm font-medium text-muted">
+                    <i class="far fa-calendar-alt mr-2"></i>January 1st - December 31st
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Metric Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+            <div class="metric-card p-5">
+                <h3 class="text-sm font-medium text-muted">NET REVENUE</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">$203,711.32</p>
+                <p class="text-xs text-red-600 font-medium mt-1">
+                    <i class="fas fa-arrow-down mr-1"></i>0.861% decrease from last year
+                </p>
+            </div>
+            <div class="metric-card p-5">
+                <h3 class="text-sm font-medium text-muted">NEW QUOTES</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">1,541</p>
+                <p class="text-xs text-red-600 font-medium mt-1">
+                    <i class="fas fa-arrow-down mr-1"></i>0.861% decrease from last year
+                </p>
+            </div>
+            <div class="metric-card p-5">
+                <h3 class="text-sm font-medium text-muted">BOUND QUOTES</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">672</p>
+                <p class="text-xs text-red-600 font-medium mt-1">
+                    <i class="fas fa-arrow-down mr-1"></i>0.861% decrease from last year
+                </p>
+            </div>
+            <div class="metric-card p-5">
+                <h3 class="text-sm font-medium text-muted">POLICIES ISSUED</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">542</p>
+                <p class="text-xs text-red-600 font-medium mt-1">
+                    <i class="fas fa-arrow-down mr-1"></i>0.861% decrease from last year
+                </p>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="metric-card p-6">
+                <h3 class="font-semibold text-gray-800 mb-2">Net Revenue (all)</h3>
+                <p class="text-4xl font-bold text-gray-900">$203,711.32</p>
+                <p class="text-sm text-red-600 font-medium mt-2">Net revenue decrease from last year</p>
+            </div>
+            <div class="metric-card p-6">
+                <h3 class="font-semibold text-gray-800 mb-2">Policies (all)</h3>
+                <p class="text-4xl font-bold text-gray-900">672</p>
+                <p class="text-sm text-red-600 font-medium mt-2">Policy decrease from last year</p>
+            </div>
+            <div class="metric-card p-6">
+                <h3 class="font-semibold text-gray-800 mb-2">Quote vs Bound Ratio (all)</h3>
+                <p class="text-4xl font-bold text-gray-900">43.608%</p>
+                <p class="text-sm text-green-600 font-medium mt-2">Ratio increase from last year (672/1541)</p>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            <div class="lg:col-span-3 metric-card p-6">
+                <h3 class="font-semibold text-gray-800 mb-4">This Year's Net Revenue (by thousands)</h3>
+                <canvas id="netRevenueChart"></canvas>
+            </div>
+            <div class="lg:col-span-2 grid grid-rows-2 gap-6">
+                <div class="metric-card p-6 flex flex-col">
+                    <h3 class="font-semibold text-gray-800 mb-4">Sales by LOB (all)</h3>
+                    <div class="flex-grow flex items-center justify-center">
+                        <canvas id="salesByLOBChart" class="max-h-[200px]"></canvas>
+                    </div>
+                </div>
+                <div class="metric-card p-6">
+                    <h3 class="font-semibold text-gray-800 mb-4">Premium Distribution (all)</h3>
+                    <canvas id="premiumDistributionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Chart.js Initializations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Net Revenue Chart (Line)
+            const netRevenueCtx = document.getElementById('netRevenueChart').getContext('2d');
+            new Chart(netRevenueCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Net Revenue',
+                        data: [15, 20, 22, 19, 25, 28, 26, 30, 28, 32, 35, 38],
+                        borderColor: tailwind.config.theme.extend.colors.accent,
+                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value + 'k';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+
+            // Sales by LOB (Donut)
+            const salesByLOBCtx = document.getElementById('salesByLOBChart').getContext('2d');
+            new Chart(salesByLOBCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['General Liability', 'Property', 'Cyber', 'Auto'],
+                    datasets: [{
+                        data: [45, 25, 15, 15],
+                        backgroundColor: ['#2563eb', '#3b82f6', '#60a5fa', '#93c5fd'],
+                        borderWidth: 0,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                boxWidth: 12,
+                                padding: 15,
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Premium Distribution (Bar)
+            const premiumDistributionCtx = document.getElementById('premiumDistributionChart').getContext('2d');
+            new Chart(premiumDistributionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['$0-2k', '$2-5k', '$5-10k', '$10-20k', '$20k+'],
+                    datasets: [{
+                        label: 'Premium',
+                        data: [120, 190, 80, 50, 30],
+                        backgroundColor: '#93c5fd',
+                        borderRadius: 4,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true },
+                        x: { grid: { display: false } }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

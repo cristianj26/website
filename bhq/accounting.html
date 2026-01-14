@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BindHQ | Accounting Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        page: '#F8F9FA',
+                        dark: '#1a202c',
+                        accent: '#2563eb',
+                        muted: '#64748b',
+                        'nav-bg': '#111827',
+                        'nav-text': '#9CA3AF',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex h-screen bg-page">
+    <!-- Sidebar -->
+    <aside class="w-20 bg-nav-bg flex flex-col items-center py-6">
+        <a href="/">
+            <img src="assets/logo.svg" alt="BindHQ" class="h-8 w-8 brightness-0 invert opacity-90">
+        </a>
+        <nav class="flex flex-col items-center space-y-8 mt-12">
+            <a href="index.html" class="text-nav-text hover:text-white" title="Dashboard"><i class="fas fa-tachometer-alt fa-lg"></i></a>
+            <a href="underwriting.html" class="text-nav-text hover:text-white" title="Underwriting"><i class="fas fa-inbox fa-lg"></i></a>
+            <a href="#" class="text-accent" title="Accounting"><i class="fas fa-calculator fa-lg"></i></a>
+            <a href="reports.html" class="text-nav-text hover:text-white" title="Reports"><i class="fas fa-chart-pie fa-lg"></i></a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 flex items-center justify-center">
+        <div class="w-full max-w-md bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <!-- Header -->
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="font-bold text-lg text-gray-800">Accounting</h3>
+                    <p class="text-sm text-muted">Collections & Premiums</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-muted">Gross Written Premium</p>
+                    <p class="font-bold text-lg text-gray-800">$0.00</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-muted">Commission Payable</p>
+                    <p class="font-bold text-lg text-gray-800">$0.00</p>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="text-sm font-semibold text-gray-700">75% Collected</span>
+                    <span class="text-sm text-muted">$15,850 / $21,150</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: 75%"></div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="flow-root">
+                <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Broker</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Type</th>
+                                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Amount</th>
+                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-0 text-right text-sm font-semibold text-gray-900">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">Marsh</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Agency Bill</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">$4,200.00</td>
+                                    <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Paid</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">Aon</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Direct Bill</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">$850.00</td>
+                                    <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">Pending</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">Willis</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Agency Bill</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">$12,100.00</td>
+                                    <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">Overdue</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

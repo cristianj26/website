@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BindHQ | Product - AMS, Policy Administration & Operations Platform</title>
+
+    <!-- Fonts: Inter + Geist Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Geist Mono', 'monospace'],
+                    },
+                    colors: {
+                        page: '#FAFAFA',
+                        dark: '#111827',
+                        accent: '#3AB1EB',
+                        muted: '#6B7280',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FAFAFA;
+            color: #111827;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Corner Bracket Button Styles */
+        .btn-bracket {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #3AB1EB;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-bracket:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(58, 177, 235, 0.35);
+            background: #2A9AD4;
+        }
+        .btn-bracket::before,
+        .btn-bracket::after,
+        .btn-bracket .corner-tl,
+        .btn-bracket .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: #3AB1EB;
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket:hover::before,
+        .btn-bracket:hover::after,
+        .btn-bracket:hover .corner-tl,
+        .btn-bracket:hover .corner-br {
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        .btn-bracket-outline {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            color: #111827;
+            border: 1px solid #D1D5DB;
+            cursor: pointer;
+        }
+        .btn-bracket-outline:hover {
+            background: rgba(58, 177, 235, 0.08);
+            border-color: #3AB1EB;
+            color: #3AB1EB;
+        }
+        .btn-bracket-outline::before,
+        .btn-bracket-outline::after,
+        .btn-bracket-outline .corner-tl,
+        .btn-bracket-outline .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: #9CA3AF;
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket-outline:hover::before,
+        .btn-bracket-outline:hover::after,
+        .btn-bracket-outline:hover .corner-tl,
+        .btn-bracket-outline:hover .corner-br {
+            border-color: #3AB1EB;
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket-outline::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket-outline::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket-outline .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket-outline .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        .btn-bracket-white {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #3AB1EB;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-bracket-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(58, 177, 235, 0.4);
+            background: #2A9AD4;
+        }
+        .btn-bracket-white::before,
+        .btn-bracket-white::after,
+        .btn-bracket-white .corner-tl,
+        .btn-bracket-white .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: #3AB1EB;
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket-white:hover::before,
+        .btn-bracket-white:hover::after,
+        .btn-bracket-white:hover .corner-tl,
+        .btn-bracket-white:hover .corner-br {
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket-white::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket-white::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket-white .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket-white .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        .btn-bracket-ghost {
+            position: relative;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Geist Mono', monospace;
+            letter-spacing: 0.02em;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            cursor: pointer;
+        }
+        .btn-bracket-ghost:hover {
+            background: rgba(58, 177, 235, 0.15);
+            border-color: #3AB1EB;
+            color: #3AB1EB;
+        }
+        .btn-bracket-ghost::before,
+        .btn-bracket-ghost::after,
+        .btn-bracket-ghost .corner-tl,
+        .btn-bracket-ghost .corner-br {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-color: rgba(255,255,255,0.5);
+            border-style: solid;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-bracket-ghost:hover::before,
+        .btn-bracket-ghost:hover::after,
+        .btn-bracket-ghost:hover .corner-tl,
+        .btn-bracket-ghost:hover .corner-br {
+            border-color: #3AB1EB;
+            width: 14px;
+            height: 14px;
+        }
+        .btn-bracket-ghost::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .btn-bracket-ghost::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .btn-bracket-ghost .corner-tl { bottom: -5px; left: -5px; border-width: 0 0 2px 2px; }
+        .btn-bracket-ghost .corner-br { bottom: -5px; right: -5px; border-width: 0 2px 2px 0; }
+
+        /* Section label - Geist Mono */
+        .section-label {
+            font-family: 'Geist Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #3AB1EB;
+        }
+
+        /* Feature number badge */
+        .feature-number {
+            font-family: 'Geist Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: #3AB1EB;
+        }
+
+        /* Feature Card */
+        .feature-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover {
+            border-color: rgba(58, 177, 235, 0.25);
+            box-shadow: 0 12px 40px rgba(58, 177, 235, 0.08);
+            transform: translateY(-4px);
+        }
+
+        /* Step Card */
+        .step-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .step-card:hover {
+            border-color: rgba(58, 177, 235, 0.3);
+            box-shadow: 0 8px 24px rgba(58, 177, 235, 0.08);
+        }
+        .step-number {
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            width: 24px;
+            height: 24px;
+            background: #3AB1EB;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Geist Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Scroll animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero stagger animation */
+        .hero-stagger > * {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: heroReveal 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .hero-stagger > *:nth-child(1) { animation-delay: 0.1s; }
+        .hero-stagger > *:nth-child(2) { animation-delay: 0.2s; }
+        .hero-stagger > *:nth-child(3) { animation-delay: 0.3s; }
+        .hero-stagger > *:nth-child(4) { animation-delay: 0.4s; }
+        @keyframes heroReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Nav styles */
+        .nav-link {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4B5563;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .nav-link:hover {
+            color: #3AB1EB;
+            background: rgba(58, 177, 235, 0.08);
+        }
+        .nav-link.active {
+            color: #3AB1EB;
+            background: rgba(58, 177, 235, 0.08);
+        }
+
+        /* Platform badge */
+        .platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(58, 177, 235, 0.1);
+            border: 1px solid rgba(58, 177, 235, 0.2);
+            border-radius: 100px;
+            font-family: 'Geist Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: #3AB1EB;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Banner -->
+    <div class="w-full flex justify-center py-3 bg-page border-b border-gray-100">
+        <a href="#" class="flex items-center gap-2 text-xs font-medium text-gray-500 uppercase tracking-wide hover:text-gray-900 transition">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> We are hiring
+            <i class="fas fa-arrow-right text-[10px] ml-1"></i>
+        </a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#FAFAFA]/95 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="assets/logo.svg" alt="BindHQ" class="h-6">
+            </a>
+
+            <div class="hidden md:flex items-center gap-1">
+                <a href="product.html" class="nav-link active">Product</a>
+                <a href="#" class="nav-link">Solutions</a>
+                <a href="#" class="nav-link">Pricing</a>
+                <a href="#" class="nav-link">Case Studies</a>
+                <a href="#" class="nav-link">About Us</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <a href="dashboard.html" class="nav-link hidden sm:block">Log in</a>
+                <button class="btn-bracket">
+                    Request Demo
+                    <span class="corner-tl"></span>
+                    <span class="corner-br"></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-24 pb-20 px-6">
+        <div class="max-w-5xl mx-auto text-center hero-stagger">
+            <div class="platform-badge mb-6">
+                <i class="fas fa-cube"></i>
+                The Complete Cloud Platform
+            </div>
+
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-[-0.02em] text-gray-900 leading-[1.05] mb-8">
+                Redefining Insurance Management
+            </h1>
+
+            <p class="text-lg md:text-xl text-gray-500 max-w-3xl mx-auto leading-relaxed mb-10">
+                Sales, Document Management, Policy Issuance, Accounting and Compliance: All-in-One. BindHQ consolidates agent portals, underwriting, back-office functions, and CRM into a unified system.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <button class="btn-bracket">
+                    Request a Demo
+                    <span class="corner-tl"></span>
+                    <span class="corner-br"></span>
+                </button>
+                <button class="btn-bracket-outline">
+                    <i class="fas fa-play mr-2"></i>
+                    Watch Product Overview
+                    <span class="corner-tl"></span>
+                    <span class="corner-br"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Core Features Section -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-label mb-4">Platform Capabilities</h2>
+                <p class="text-3xl md:text-4xl font-bold text-gray-900 max-w-3xl mx-auto">
+                    Everything you need to run a modern specialty insurance operation
+                </p>
+            </div>
+
+            <!-- Feature 1: Policy Administration -->
+            <div class="feature-card mb-8 fade-in-up border-t-4 border-blue-500">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <!-- Mockup -->
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden">
+                        <div class="p-4 text-xs">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-semibold text-gray-700">Policy Management</span>
+                                <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-[10px] font-medium">12 Active</span>
+                            </div>
+                            <!-- Policy List -->
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-100">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-file-alt text-blue-500 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">POL-2024-0847</div>
+                                            <div class="text-[10px] text-gray-400">Commercial Property</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-[10px]">Bound</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-100">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-amber-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-file-alt text-amber-500 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">POL-2024-0846</div>
+                                            <div class="text-[10px] text-gray-400">General Liability</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-1 bg-amber-100 text-amber-600 rounded text-[10px]">Pending</span>
+                                </div>
+                                <div class="flex items-center justify-between p-3 bg-white rounded-lg border border-gray-100">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-file-alt text-purple-500 text-xs"></i>
+                                        </div>
+                                        <div>
+                                            <div class="font-medium text-gray-800">POL-2024-0845</div>
+                                            <div class="text-[10px] text-gray-400">Professional Liability</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-600 rounded text-[10px]">Quote</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="feature-number mb-3">01</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Policy Administration</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">
+                            Enter submissions, track brokerage quotes, manage endorsements, generate policy documents, invoice existing policies and seamlessly process payments from one simple platform.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 font-mono text-sm font-semibold text-gray-900 hover:text-[#3AB1EB] transition-colors">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 2: Insurance Accounting -->
+            <div class="feature-card mb-8 fade-in-up border-t-4 border-emerald-500">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <!-- Content -->
+                    <div class="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                        <div class="feature-number mb-3">02</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Insurance Accounting</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">
+                            Cumbersome AMS accounting is a thing of the past. BindHQ's built-in general ledger lets you track revenue lines, manage payable commissions and streamline E&S tax filing without switching software.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 font-mono text-sm font-semibold text-gray-900 hover:text-[#3AB1EB] transition-colors">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <!-- Mockup -->
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden order-1 md:order-2">
+                        <div class="p-4 text-xs">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-semibold text-gray-700">General Ledger</span>
+                                <span class="text-[10px] text-gray-400">Oct 2024</span>
+                            </div>
+                            <!-- Summary Cards -->
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div class="bg-white p-3 rounded-lg border border-gray-100">
+                                    <div class="text-[10px] text-gray-400 mb-1">Revenue</div>
+                                    <div class="text-lg font-bold text-emerald-600">$847,230</div>
+                                </div>
+                                <div class="bg-white p-3 rounded-lg border border-gray-100">
+                                    <div class="text-[10px] text-gray-400 mb-1">Commissions</div>
+                                    <div class="text-lg font-bold text-gray-800">$124,560</div>
+                                </div>
+                            </div>
+                            <!-- Transactions -->
+                            <div class="bg-white rounded-lg border border-gray-100 p-3">
+                                <div class="text-[10px] font-medium text-gray-500 mb-2">Recent Entries</div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-[11px]">
+                                        <span class="text-gray-600">Premium Received</span>
+                                        <span class="text-emerald-600 font-medium">+$12,450</span>
+                                    </div>
+                                    <div class="flex justify-between text-[11px]">
+                                        <span class="text-gray-600">Commission Payout</span>
+                                        <span class="text-red-500 font-medium">-$1,867</span>
+                                    </div>
+                                    <div class="flex justify-between text-[11px]">
+                                        <span class="text-gray-600">E&S Tax Filing</span>
+                                        <span class="text-red-500 font-medium">-$623</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 3: Reporting & Compliance -->
+            <div class="feature-card mb-8 fade-in-up border-t-4 border-purple-500">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <!-- Mockup -->
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden">
+                        <div class="p-4 text-xs">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-semibold text-gray-700">Compliance Dashboard</span>
+                                <span class="px-2 py-1 bg-green-100 text-green-600 rounded text-[10px] font-medium">All Clear</span>
+                            </div>
+                            <!-- State Compliance -->
+                            <div class="bg-white rounded-lg border border-gray-100 p-3 mb-3">
+                                <div class="text-[10px] font-medium text-gray-500 mb-2">State Filings</div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[11px] text-gray-600">California</span>
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="w-full h-full bg-green-500 rounded-full"></div>
+                                            </div>
+                                            <i class="fas fa-check-circle text-green-500 text-[10px]"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[11px] text-gray-600">Texas</span>
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="w-full h-full bg-green-500 rounded-full"></div>
+                                            </div>
+                                            <i class="fas fa-check-circle text-green-500 text-[10px]"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[11px] text-gray-600">Florida</span>
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="w-3/4 h-full bg-amber-500 rounded-full"></div>
+                                            </div>
+                                            <i class="fas fa-clock text-amber-500 text-[10px]"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-[11px] text-gray-600">New York</span>
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                                                <div class="w-full h-full bg-green-500 rounded-full"></div>
+                                            </div>
+                                            <i class="fas fa-check-circle text-green-500 text-[10px]"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Next Filing -->
+                            <div class="bg-purple-50 rounded-lg p-3 border border-purple-100">
+                                <div class="flex items-center gap-2">
+                                    <i class="fas fa-calendar text-purple-500"></i>
+                                    <div>
+                                        <div class="text-[11px] font-medium text-purple-700">Next Filing Due</div>
+                                        <div class="text-[10px] text-purple-500">FL Q4 Report - Nov 15</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="feature-number mb-3">03</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Reporting & Compliance</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">
+                            When it comes to insurance, compliance is king. BindHQ ensures you maintain compliance with automated reporting tools regardless of how many states you operate in.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 font-mono text-sm font-semibold text-gray-900 hover:text-[#3AB1EB] transition-colors">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 4: Program Administration -->
+            <div class="feature-card mb-8 fade-in-up border-t-4 border-amber-500">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <!-- Content -->
+                    <div class="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                        <div class="feature-number mb-3">04</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Program Administration</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">
+                            Meet the demand for E&S insurance with customizable program offerings, bespoke rating functionality, specialized underwriting guidelines and policy generation tools.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 font-mono text-sm font-semibold text-gray-900 hover:text-[#3AB1EB] transition-colors">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <!-- Mockup -->
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-900 border border-gray-700 overflow-hidden order-1 md:order-2">
+                        <div class="p-4 text-xs">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-semibold text-white">Program Builder</span>
+                                <span class="px-2 py-1 bg-amber-500/20 text-amber-400 rounded text-[10px] font-medium">Draft</span>
+                            </div>
+                            <!-- Program Config -->
+                            <div class="bg-gray-800 rounded-lg p-3 mb-3 border border-gray-700">
+                                <div class="text-[10px] text-gray-400 mb-2">Contractors GL Program</div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between text-[11px]">
+                                        <span class="text-gray-400">Base Rate</span>
+                                        <span class="text-white font-mono">$2.45 / $1,000</span>
+                                    </div>
+                                    <div class="flex justify-between text-[11px]">
+                                        <span class="text-gray-400">Min Premium</span>
+                                        <span class="text-white font-mono">$5,000</span>
+                                    </div>
+                                    <div class="flex justify-between text-[11px]">
+                                        <span class="text-gray-400">Commission</span>
+                                        <span class="text-white font-mono">15%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Rating Factors -->
+                            <div class="bg-gray-800 rounded-lg p-3 border border-gray-700">
+                                <div class="text-[10px] text-gray-400 mb-2">Rating Factors</div>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="px-2 py-1 bg-amber-500/20 text-amber-400 rounded text-[10px]">Years in Business</span>
+                                    <span class="px-2 py-1 bg-amber-500/20 text-amber-400 rounded text-[10px]">Loss History</span>
+                                    <span class="px-2 py-1 bg-amber-500/20 text-amber-400 rounded text-[10px]">Employee Count</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 5: Integrations & APIs -->
+            <div class="feature-card mb-8 fade-in-up border-t-4 border-cyan-500">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <!-- Mockup -->
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-900 border border-gray-700 overflow-hidden">
+                        <div class="p-4 text-xs">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-semibold text-white">API Console</span>
+                                <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded text-[10px] font-medium">Connected</span>
+                            </div>
+                            <!-- API Endpoints -->
+                            <div class="bg-gray-800 rounded-lg p-3 mb-3 border border-gray-700 font-mono">
+                                <div class="text-[10px] text-gray-400 mb-2">Endpoints</div>
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-1.5 py-0.5 bg-green-500/20 text-green-400 rounded text-[9px]">GET</span>
+                                        <span class="text-cyan-400 text-[10px]">/api/v1/policies</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-1.5 py-0.5 bg-blue-500/20 text-blue-400 rounded text-[9px]">POST</span>
+                                        <span class="text-cyan-400 text-[10px]">/api/v1/quotes</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="px-1.5 py-0.5 bg-amber-500/20 text-amber-400 rounded text-[9px]">PUT</span>
+                                        <span class="text-cyan-400 text-[10px]">/api/v1/endorsements</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Integrations -->
+                            <div class="grid grid-cols-4 gap-2">
+                                <div class="aspect-square bg-gray-800 rounded-lg flex items-center justify-center border border-gray-700">
+                                    <i class="fab fa-slack text-gray-500"></i>
+                                </div>
+                                <div class="aspect-square bg-gray-800 rounded-lg flex items-center justify-center border border-gray-700">
+                                    <i class="fab fa-microsoft text-gray-500"></i>
+                                </div>
+                                <div class="aspect-square bg-gray-800 rounded-lg flex items-center justify-center border border-gray-700">
+                                    <i class="fas fa-file-signature text-gray-500"></i>
+                                </div>
+                                <div class="aspect-square bg-gray-800 rounded-lg flex items-center justify-center border border-gray-700">
+                                    <i class="fas fa-credit-card text-gray-500"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Content -->
+                    <div class="p-8 md:p-12 flex flex-col justify-center">
+                        <div class="feature-number mb-3">05</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Integrations & APIs</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">
+                            BindHQ's API-first approach allows integration with best-in-breed technology solutions including single-sign-on, address verification and workflow capabilities.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 font-mono text-sm font-semibold text-gray-900 hover:text-[#3AB1EB] transition-colors">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature 6: Operational Reporting -->
+            <div class="feature-card fade-in-up border-t-4 border-rose-500">
+                <div class="grid md:grid-cols-2 gap-0">
+                    <!-- Content -->
+                    <div class="p-8 md:p-12 flex flex-col justify-center order-2 md:order-1">
+                        <div class="feature-number mb-3">06</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Operational Reporting</h3>
+                        <p class="text-gray-500 leading-relaxed mb-6">
+                            Give managers real-time snapshots of agency standings with integrated dashboards analyzing producer behavior, agency revenue, and performance metrics.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 font-mono text-sm font-semibold text-gray-900 hover:text-[#3AB1EB] transition-colors">
+                            Learn more <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <!-- Mockup -->
+                    <div class="m-6 md:m-8 rounded-xl bg-gray-50 border border-gray-200 overflow-hidden order-1 md:order-2">
+                        <div class="p-4 text-xs">
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-semibold text-gray-700">Performance Dashboard</span>
+                                <span class="text-[10px] text-gray-400">This Month</span>
+                            </div>
+                            <!-- Metrics -->
+                            <div class="grid grid-cols-3 gap-2 mb-3">
+                                <div class="bg-white p-2 rounded-lg border border-gray-100 text-center">
+                                    <div class="text-lg font-bold text-gray-800">$2.4M</div>
+                                    <div class="text-[9px] text-gray-400">Premium</div>
+                                </div>
+                                <div class="bg-white p-2 rounded-lg border border-gray-100 text-center">
+                                    <div class="text-lg font-bold text-rose-500">847</div>
+                                    <div class="text-[9px] text-gray-400">Policies</div>
+                                </div>
+                                <div class="bg-white p-2 rounded-lg border border-gray-100 text-center">
+                                    <div class="text-lg font-bold text-emerald-500">+18%</div>
+                                    <div class="text-[9px] text-gray-400">Growth</div>
+                                </div>
+                            </div>
+                            <!-- Top Producers -->
+                            <div class="bg-white rounded-lg border border-gray-100 p-3">
+                                <div class="text-[10px] font-medium text-gray-500 mb-2">Top Producers</div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-6 h-6 bg-rose-100 rounded-full flex items-center justify-center text-[10px] font-bold text-rose-600">1</div>
+                                            <span class="text-[11px] text-gray-700">Sarah M.</span>
+                                        </div>
+                                        <span class="text-[11px] font-medium text-gray-800">$487K</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-[10px] font-bold text-gray-600">2</div>
+                                            <span class="text-[11px] text-gray-700">James R.</span>
+                                        </div>
+                                        <span class="text-[11px] font-medium text-gray-800">$412K</span>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <div class="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-[10px] font-bold text-amber-600">3</div>
+                                            <span class="text-[11px] text-gray-700">Mike T.</span>
+                                        </div>
+                                        <span class="text-[11px] font-medium text-gray-800">$389K</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Integration Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-up">
+                    <h2 class="section-label mb-4">Seamless Integrations</h2>
+                    <p class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                        When Integration Is This Easy, The Workflow Possibilities Are Endless
+                    </p>
+                    <p class="text-lg text-gray-500 mb-8 leading-relaxed">
+                        BindHQ incorporates single-sign-on (SSO) software, agency-wide email assimilation, data-driven dashboard features, e-signature and e-pay within one platform.
+                    </p>
+
+                    <div class="flex flex-wrap gap-3 mb-8">
+                        <span class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">DocuSign</span>
+                        <span class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">ePayPolicy</span>
+                        <span class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">Google Maps</span>
+                        <span class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">Mailchimp</span>
+                        <span class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">Microsoft 365</span>
+                        <span class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium text-gray-700">Slack</span>
+                    </div>
+
+                    <a href="#" class="inline-flex items-center gap-2 font-mono text-sm font-semibold text-gray-900 hover:text-[#3AB1EB] transition-colors">
+                        View all integrations <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="fade-in-up">
+                    <!-- Integration Visual -->
+                    <div class="relative bg-white border border-gray-200 rounded-2xl p-8">
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fab fa-slack text-3xl text-gray-400"></i>
+                            </div>
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fab fa-microsoft text-3xl text-gray-400"></i>
+                            </div>
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fab fa-google text-3xl text-gray-400"></i>
+                            </div>
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fab fa-mailchimp text-3xl text-gray-400"></i>
+                            </div>
+                            <div class="aspect-square bg-[#3AB1EB]/10 rounded-xl flex items-center justify-center border-2 border-[#3AB1EB]">
+                                <img src="assets/logo.svg" alt="BindHQ" class="h-6">
+                            </div>
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fas fa-file-signature text-3xl text-gray-400"></i>
+                            </div>
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fas fa-credit-card text-3xl text-gray-400"></i>
+                            </div>
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fas fa-database text-3xl text-gray-400"></i>
+                            </div>
+                            <div class="aspect-square bg-gray-50 rounded-xl flex items-center justify-center border border-gray-100">
+                                <i class="fas fa-cloud text-3xl text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding Section -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="section-label mb-4">Migration & Onboarding</h2>
+                <p class="text-3xl md:text-4xl font-bold text-gray-900 max-w-3xl mx-auto">
+                    From discovery to launch in weeks, not months
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in-up">
+                <!-- Step 1 -->
+                <div class="step-card pt-8">
+                    <div class="step-number">1</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Initial Consultation</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Discovery calls, demos, and business analysis to understand your unique requirements.
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card pt-8">
+                    <div class="step-number">2</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Expert Insight</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Leverage our expertise for operational improvements and business practice optimization.
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card pt-8">
+                    <div class="step-number">3</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Custom Configuration</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Project management, configuration services, and seamless data migration.
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card pt-8">
+                    <div class="step-number">4</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Free Tech Training</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        BindHQ University, office hours, and on-demand video training for your team.
+                    </p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step-card pt-8">
+                    <div class="step-number">5</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Stress Free Launch</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Production launch with operating review to ensure everything runs smoothly.
+                    </p>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="step-card pt-8">
+                    <div class="step-number">6</div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">On-Demand Support</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        Chatbot, knowledge base, phone and email support whenever you need it.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-gray-900 rounded-3xl p-12 md:p-16 text-center relative overflow-hidden fade-in-up">
+                <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\'%3E%3Cg fill=\'%23ffffff\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="relative z-10">
+                    <h2 class="section-label mb-4 text-[#3AB1EB]">See It In Action</h2>
+                    <p class="text-2xl md:text-3xl font-bold text-white mb-6">
+                        It's time to rethink your AMS
+                    </p>
+                    <p class="text-gray-400 mb-8 max-w-xl mx-auto">
+                        Watch this video to learn how Wholesalers & MGAs are modernizing their core systems with BindHQ.
+                    </p>
+                    <button class="btn-bracket-white">
+                        <i class="fas fa-play mr-2"></i>
+                        Watch Product Overview
+                        <span class="corner-tl"></span>
+                        <span class="corner-br"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recognition Section -->
+    <section class="py-24 px-6 bg-white">
+        <div class="max-w-6xl mx-auto text-center fade-in-up">
+            <h2 class="section-label mb-4">Trusted & Recognized</h2>
+            <p class="text-2xl md:text-3xl font-bold text-gray-900 mb-12">
+                Highly-rated across independent rating platforms
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-12 items-center opacity-60 grayscale">
+                <div class="flex flex-col items-center gap-2">
+                    <i class="fab fa-product-hunt text-4xl text-gray-400"></i>
+                    <span class="text-sm font-medium text-gray-500">Capterra</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <i class="fas fa-code-branch text-4xl text-gray-400"></i>
+                    <span class="text-sm font-medium text-gray-500">SourceForge</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <span class="text-4xl font-bold text-gray-400">G2</span>
+                    <span class="text-sm font-medium text-gray-500">G2 Crowd</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <i class="fas fa-award text-4xl text-gray-400"></i>
+                    <span class="text-sm font-medium text-gray-500">TrustRadius</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="py-24 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="bg-gray-900 rounded-3xl p-12 md:p-20 text-center relative overflow-hidden fade-in-up">
+                <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\'%3E%3Cg fill=\'%23ffffff\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">
+                        Ready to modernize your insurance operations?
+                    </h2>
+                    <p class="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">
+                        See how BindHQ can help you bind more business, expand profit margins, and become a more valuable company.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+                        <button class="btn-bracket-white">
+                            Request a Demo
+                            <span class="corner-tl"></span>
+                            <span class="corner-br"></span>
+                        </button>
+                        <button class="btn-bracket-ghost">
+                            Talk to Sales
+                            <span class="corner-tl"></span>
+                            <span class="corner-br"></span>
+                        </button>
+                    </div>
+                    <div class="flex flex-col sm:flex-row justify-center gap-8 text-sm text-gray-400">
+                        <a href="mailto:sales@bindhq.com" class="hover:text-white transition-colors">
+                            <i class="fas fa-envelope mr-2"></i> sales@bindhq.com
+                        </a>
+                        <a href="tel:844-424-6347" class="hover:text-white transition-colors">
+                            <i class="fas fa-phone mr-2"></i> 844-424-6347
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-gray-100">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4">
+                    <img src="assets/logo.svg" alt="BindHQ" class="h-5">
+                    <span class="text-sm text-gray-400">The AMS 2.0 for specialty insurance</span>
+                </div>
+                <div class="flex items-center gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-gray-900 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-gray-900 transition-colors">Terms</a>
+                    <span class="text-gray-300">|</span>
+                    <span>&copy; 2024 BindHQ</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll Animation Script -->
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-up').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>

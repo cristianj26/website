@@ -1,0 +1,17 @@
+<svg width="120" height="28" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 6-pointed asterisk/sparkle -->
+  <g transform="translate(2, 2)">
+    <!-- Center dot -->
+    <circle cx="12" cy="12" r="2" fill="#1D4ED8"/>
+    <!-- Vertical line -->
+    <line x1="12" y1="0" x2="12" y2="24" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round"/>
+    <!-- Horizontal line -->
+    <line x1="0" y1="12" x2="24" y2="12" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round"/>
+    <!-- Diagonal lines -->
+    <line x1="3" y1="3" x2="21" y2="21" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round"/>
+    <line x1="21" y1="3" x2="3" y2="21" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- Text -->
+  <text x="32" y="19" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="600" fill="#1F2937">Bind</text>
+  <text x="70" y="19" font-family="Inter, -apple-system, sans-serif" font-size="17" font-weight="600" fill="#1D4ED8">HQ</text>
+</svg>

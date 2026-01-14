@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BindHQ | Underwriting Workbench</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        page: '#F8F9FA',
+                        dark: '#1a202c',
+                        accent: '#2563eb',
+                        muted: '#64748b',
+                        'nav-bg': '#111827',
+                        'nav-text': '#9CA3AF',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex h-screen bg-page">
+    <!-- Sidebar -->
+    <aside class="w-20 bg-nav-bg flex flex-col items-center py-6">
+        <a href="/">
+            <img src="assets/logo.svg" alt="BindHQ" class="h-8 w-8 brightness-0 invert opacity-90">
+        </a>
+        <nav class="flex flex-col items-center space-y-8 mt-12">
+            <a href="index.html" class="text-nav-text hover:text-white" title="Dashboard"><i class="fas fa-tachometer-alt fa-lg"></i></a>
+            <a href="#" class="text-accent" title="Underwriting"><i class="fas fa-inbox fa-lg"></i></a>
+            <a href="accounting.html" class="text-nav-text hover:text-white" title="Accounting"><i class="fas fa-calculator fa-lg"></i></a>
+            <a href="reports.html" class="text-nav-text hover:text-white" title="Reports"><i class="fas fa-chart-pie fa-lg"></i></a>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8 flex items-center justify-center">
+        <div class="w-full max-w-sm bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <div class="flex items-center gap-6">
+                <!-- Risk Score -->
+                <div class="relative">
+                    <svg class="w-28 h-28" x-data="{ circumference: 2 * 22 / 7 * 45 }" :style="{ 'stroke-dasharray': circumference, 'stroke-dashoffset': circumference * (1 - 0.74) }">
+                        <circle class="text-gray-200" stroke-width="10" stroke="currentColor" fill="transparent" r="45" cx="56" cy="56" />
+                        <circle class="text-yellow-500" stroke-width="10" stroke-linecap="round" stroke="currentColor" fill="transparent" r="45" cx="56" cy="56" style="transform: rotate(-90deg); transform-origin: 50% 50%;" />
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <span class="text-3xl font-bold text-gray-800">74%</span>
+                    </div>
+                </div>
+
+                <!-- Alerts -->
+                <div class="flex-1">
+                    <h3 class="font-semibold text-gray-500 text-sm uppercase tracking-wider mb-3">Property Crime Score</h3>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center gap-3 text-sm text-gray-700 font-medium">
+                            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                            <span>earthquake zone detected</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-700 font-medium">
+                            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                            <span>Escalation required</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-700 font-medium">
+                            <i class="fas fa-exclamation-triangle text-red-500"></i>
+                            <span>High Replacement Cost (RC) (Fire)</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-gray-700 font-medium">
+                            <i class="fas fa-exclamation-triangle text-yellow-500"></i>
+                            <span>Proximity to High Hazard Zone</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+</body>
+</html>
